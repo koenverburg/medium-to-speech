@@ -1,0 +1,13 @@
+{
+  "name": "medium-to-speech",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:koenverburg/medium-to-speech.git",
+  "author": "Koen Verburg <creativekoen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "say": "^0.16.0"
+  }
+}
