@@ -3,8 +3,10 @@ const say = require('say')
 const path = require('path')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const exporter = require('mediumexporter')
 
 if (!fs.existsSync('audio-files')) fs.mkdirSync('audio-files')
+if (!fs.existsSync('markdown-files')) fs.mkdirSync('markdown-files')
 
 const request = url => {
   return axios.get(url, { headers: {
@@ -61,8 +63,10 @@ void (async () => {
     const { response, error } = await request(article)
     if (error) throw new Error(error)
 
-    const content = extractTextToSpeak(response.data)
-    convertTextToSpeechFile(content, fileName)
+    await exporter.getPost(url, {
+      output: `markdown-files`,
+      hugo: false,
+      frontmatter: true
   })
 })()
 
