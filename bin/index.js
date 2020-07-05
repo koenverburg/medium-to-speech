@@ -39,14 +39,12 @@ const convertTextToSpeechFile = (text, fileName) => {
 }
 
 const createFileName = url => {
-  const pattern = /https:\/\/((\w.+)\/(.*)|(\w.+))\/(.*)/gm
+  const pattern = /https:\/\/((\w.+)\/(.*)|(\w.+))\/((.*)(---------(\d+)------------------)|(.*))/gm
   const re = new RegExp(pattern)
   const match = re.exec(url)
-
-  return {
-    title: match[5],
-    publication: match[4] ? match[4] : match[3]
-  }
+  const publication = match[4] ? match[4] : match[3]
+  const startNumber = match[6] ? match[6] : '000'
+  return `${startNumber}_${publication}_${match[5].replace('?source=bookmarks', '')}`
 }
 
 const extractTextToSpeak = text => {
