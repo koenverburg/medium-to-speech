@@ -1,0 +1,46 @@
+{
+  "exclude": [
+    ".next",
+    "node_modules",
+    "**/__tests__/*.spec.ts",
+    "**/__tests__/*.spec.tsx"
+  ],
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": false,
+    "noEmit": true,
+    "allowJs": true,
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "outDir": ".next",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "noUnusedParameters": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "paths": {}
+  },
+  "include": [
+    "bin/*.js",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

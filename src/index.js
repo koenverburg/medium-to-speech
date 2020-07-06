@@ -8,12 +8,16 @@ const exporter = require('mediumexporter')
 if (!fs.existsSync('audio-files')) fs.mkdirSync('audio-files')
 if (!fs.existsSync('markdown-files')) fs.mkdirSync('markdown-files')
 
-const request = url => {
-  return axios.get(url, { headers: {
-    'Accept-Encoding': 'utf-8'
-  }})
-    .then(response => ({response}))
-    .catch(error => ({error}))
+const cleanUrl = url => {
+  const pattern = /\?source=bookmarks---------(\d+).+/gm
+  const re = new RegExp(pattern)
+  const match = re.exec(url)
+
+  if (match) {
+    return url.substring((url.length - match[0].length), -match[0].length);
+  }
+
+  return url
 }
 
 const readTextFile = () => {
@@ -21,7 +25,7 @@ const readTextFile = () => {
 
   if (fs.existsSync(textFile)) {
     const content = fs.readFileSync(textFile, { encoding: 'utf-8'})
-    return content.split('\n').map(line => line.trimRight()) // this will get rid of any \n\r stuff
+    return content.split('\n').map(line => line.trimRight()) // this will get rid of any \n\r stuff, just in case
   } else {
     console.log('no file found!')
     process.exit(0)
@@ -29,12 +33,12 @@ const readTextFile = () => {
 }
 
 const convertTextToSpeechFile = (text, fileName) => {
-  say.export(text, 'Alex', 0.7, `./audio-files/${fileName.publication}_${fileName.title}.mp3`, (err) => {
+  say.export(text, 0.7, 'Alex', `audio-files/${fileName}.mp3`, err => {
     if (err) {
       return console.error(err)
     }
 
-    console.log('Text has been saved to hal.wav.')
+    console.log(`Text has been saved to ./audio-files/${fileName}.mp3`)
   })
 }
 
@@ -53,18 +57,28 @@ const extractTextToSpeak = text => {
   return contentSelector.text().trim().replace(/<img.*\/>/, '')
 }
 
-void (async () => {
+(async () => {
   const articles = readTextFile()
-  articles.forEach(async article => {
-    const fileName = createFileName(article)
+  // articles.forEach(async article => {
+    // console.log('');
+    const url = cleanUrl(articles[0])
+    const fileName = createFileName(articles[0])
 
-    const { response, error } = await request(article)
-    if (error) throw new Error(error)
+    console.log(`[*] original url: ${articles[0]}`);
+    console.log(`[*] clean url: ${url}`);
+    console.log(`[*] created the following filename: ${fileName}`);
 
     await exporter.getPost(url, {
       output: `markdown-files`,
       hugo: false,
       frontmatter: true
-  })
+    })
+
+    // const content = extractTextToSpeak(response.data)
+    // convertTextToSpeechFile(content, fileName)
+
+    console.log('[!] Done');
+    console.log('');
+  // })
 })()
 

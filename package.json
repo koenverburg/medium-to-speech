@@ -5,12 +5,24 @@
   "repository": "git@github.com:koenverburg/medium-to-speech.git",
   "author": "Koen Verburg <creativekoen@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --reporters=default -u -i --notify --verbose"
+  },
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
+    "jest": "^26.1.0",
+    "jest-junit": "^11.0.1",
+    "jest-resolve-cached": "^1.1.1",
+    "markdown-loader-jest": "^0.1.1",
     "mediumexporter": "github:xdamman/mediumexporter#v0.2.0",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",
-    "say": "^0.16.0"
+    "say": "^0.16.0",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.3"
   }
 }
