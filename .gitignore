@@ -1,2 +1,5 @@
 *.mp3
 node_modules/
+markdown-files/
+articles.txt
+*.logs
