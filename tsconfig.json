@@ -1,6 +1,6 @@
 {
   "exclude": [
-    ".next",
+    "bin",
     "node_modules",
     "**/__tests__/*.spec.ts",
     "**/__tests__/*.spec.tsx"
@@ -11,12 +11,9 @@
     "noEmit": true,
     "allowJs": true,
     "target": "esnext",
-    "module": "esnext",
-    "jsx": "preserve",
-    "outDir": ".next",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "sourceMap": false,
+    "sourceMap": true,
     "esModuleInterop": true,
     "removeComments": true,
     "resolveJsonModule": true,
@@ -34,12 +31,10 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
-    ],
-    "paths": {}
+    ]
   },
   "include": [
-    "bin/*.js",
+    "src/*.ts",
     "**/*.ts",
     "**/*.tsx"
   ]

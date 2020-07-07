@@ -6,9 +6,12 @@
   "author": "Koen Verburg <creativekoen@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "dist": "ncc build src/index.ts -o bin",
+    "watch": "ncc build src/index.ts -o bin --watch",
     "test": "jest --reporters=default -u -i --notify --verbose"
   },
   "dependencies": {
+    "@zeit/ncc": "^0.22.3",
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "jest": "^26.1.0",
