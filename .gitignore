@@ -3,3 +3,4 @@ node_modules/
 markdown-files/
 articles.txt
 *.logs
+bin
