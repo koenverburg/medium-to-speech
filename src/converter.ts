@@ -18,13 +18,9 @@ export class Converter {
       title
     } = this.contents.payload.value
 
-    console.log(title);
-
     const { paragraphs, sections } = this.contents.payload.value.content.bodyModel;
 
     this.formatParagraphs(paragraphs);
-    // console.log(sections);
-
 
     return ''
   }
@@ -33,16 +29,12 @@ export class Converter {
     const paragraphsBlocks = await paragraphs.map(async (paragraph: any, index: number) => {
       const { iframe, metadata, mixtapeMetadata, name, text, type } = paragraph;
 
-      console.log( iframe, metadata, mixtapeMetadata, name, text, type );
-
       switch (type) {
         case paragraphTypes.paragraph:
             return text
 
         case paragraphTypes.h1:
-            if (index === 0) {
-              console.log('first title');
-              console.log(text);
+            if (index === 0) { // ignore the first otherwise you have double titles
               return ''
             } else {
               return `# ${text}`
@@ -83,6 +75,8 @@ export class Converter {
       process.stdout.write(`${paragraph}\n`)
       throw new Error(`Unsupported type: ${type}`);
     })
+
+    // console.log(paragraphsBlocks);
   }
 
 
