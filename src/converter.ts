@@ -10,15 +10,12 @@ export class Converter {
     this.contents = contents
   }
 
-  public convert() {
-    const {
-      firstPublishedAt,
-      latestPublishedAt,
-      slug,
-      title
-    } = this.contents.payload.value
+  public async convert() {
+    const { value, references } = this.contents.payload;
+    const { paragraphs, sections } = value.content.bodyModel;
 
-    const { paragraphs, sections } = this.contents.payload.value.content.bodyModel;
+    const frontmatter = this.createFrontmatter(value, references)
+    const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
     this.formatParagraphs(paragraphs);
 
@@ -26,8 +23,8 @@ export class Converter {
   }
 
   private async formatParagraphs(paragraphs: any) {
-    const paragraphsBlocks = await paragraphs.map(async (paragraph: any, index: number) => {
-      const { iframe, metadata, mixtapeMetadata, name, text, type } = paragraph;
+    const results = paragraphs.map(async (paragraph: any, index: number) => {
+      const { text, type, iframe, metadata, mixtapeMetadata  } = paragraph;
 
       switch (type) {
         case paragraphTypes.paragraph:
@@ -64,7 +61,8 @@ export class Converter {
         case paragraphTypes.imageWithDescription:
           // do api call to look up mediaResourceType
           const { payload: { value: resource } } = await medium.getMediaResource(`https://medium.com/media/${mixtapeMetadata.mediaResourceId}?format=json`)
-          return this.determineMediaEmbed(resource)
+          const image = this.determineMediaEmbed(resource)
+          return image
 
         case paragraphTypes.media:
           // do api call to look up mediaResourceType
@@ -76,7 +74,7 @@ export class Converter {
       throw new Error(`Unsupported type: ${type}`);
     })
 
-    // console.log(paragraphsBlocks);
+    return await Promise.all(results)
   }
 
 
@@ -108,6 +106,8 @@ export class Converter {
               ></iframe>
     `
   }
+
+
   private createFrontmatter(value: any, references: any) {
     const { slug, title, firstPublishedAt, latestPublishedAt } = value
     // References and the User, Collection, Social objects inside
