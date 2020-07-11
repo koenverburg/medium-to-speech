@@ -72,11 +72,7 @@ export class Converter {
         case paragraphTypes.imageWithDescription:
           // do api call to look up mediaResourceType
           const { payload: { value: resource } } = await medium.getMediaResource(`https://medium.com/media/${mixtapeMetadata.mediaResourceId}?format=json`)
-
-          console.log(resource);
-          const result = this.determineMediaEmbed(resource)
-
-          return text
+          return this.determineMediaEmbed(resource)
 
         case paragraphTypes.media:
           // do api call to look up mediaResourceType
@@ -90,15 +86,21 @@ export class Converter {
   }
 
 
-  private async determineMediaEmbed(resource: any) {
+  private determineMediaEmbed(resource: any) {
     switch (resource.mediaResourceType) {
       case mediaTypes.MediaResourceExternalLink:
         return this.formatIframe(resource)
 
       case mediaTypes.MediaResourceTweet:
-        const { html } = await medium.getTweetEmbed(`https://publish.twitter.com/oembed?url=${resource.href}`)
-        return html
+        return ''
+        // const { html } = await medium.getTweetEmbed(`https://publish.twitter.com/oembed?url=${resource.href}`)
+        // return html
+      case mediaTypes.MediaResourceMediumPost:
+        return ''
     }
+
+    process.stdout.write(`${resource}\n`)
+    throw new Error(`Unsupported type: ${resource.mediaResourceType}`);
   }
 
   private formatIframe(resource: any) {
