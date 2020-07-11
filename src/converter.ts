@@ -1,5 +1,6 @@
 import { paragraphTypes } from './Enums/paragraphTypes'
 import { MediumHttpClient } from './client'
+import { paragraphTypes } from './Enums/paragraphTypes'
 import { mediaTypes } from './Enums/mediaTypes'
 
 const medium = new MediumHttpClient()
