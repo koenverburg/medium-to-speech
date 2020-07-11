@@ -1,4 +1,5 @@
 export enum mediaTypes {
   MediaResourceExternalLink = 'MediaResourceExternalLink',
-  MediaResourceTweet = 'MediaResourceTweet'
+  MediaResourceTweet = 'MediaResourceTweet',
+  MediaResourceMediumPost = 'MediaResourceMediumPost'
 }
