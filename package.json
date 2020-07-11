@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dist": "ncc build src/index.ts -o bin",
-    "watch": "ncc build src/index.ts -o bin --watch",
+    "watch": "ncc build src/index.ts -o bin --watch -s",
     "test": "jest --reporters=default -u -i --notify --verbose"
   },
   "dependencies": {
