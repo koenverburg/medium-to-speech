@@ -108,4 +108,33 @@ export class Converter {
               ></iframe>
     `
   }
+  private createFrontmatter(value: any, references: any) {
+    const { slug, title, firstPublishedAt, latestPublishedAt } = value
+    // References and the User, Collection, Social objects inside
+    // are build using the following schema
+    // references: {
+    //   User: { // Or Collection, Social
+    //      "<base64 string capped to 11 characters>" : {
+    //        ...user object
+    //    }
+    //   }
+    // }
+
+    const userReference = references['User']
+    const userId = Object.keys(userReference)[0]
+    const user = userReference[userId]
+
+    return `
+---
+Author: ${user.name}
+Bio: ${user.bio}
+Title: ${title}
+Medium Author: https://medium.com/@${user.username}
+Medium Article: ${slug}
+Twitter: https://twitter.com/${user.twitterScreenName}
+Article Published at: ${firstPublishedAt}
+Article Updated at: ${latestPublishedAt}
+---
+`
+  }
 }
