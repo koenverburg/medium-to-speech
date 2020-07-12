@@ -4,3 +4,4 @@ markdown-files/
 articles.txt
 *.logs
 bin
+data/
