@@ -112,11 +112,11 @@ export class Converter {
           return formattedText
 
         case paragraphTypes.h1:
-            if (index === 0) { // ignore the first otherwise you have double titles
-              return ''
-            } else {
+          if (index === 0) { // ignore the first otherwise you have double titles
+            return ''
+          } else {
             return `# ${formattedText}`
-            }
+          }
 
         case paragraphTypes.h3:
           // This is strange case because It looks like a h3 but on medium it renders as an blockquote
@@ -161,8 +161,17 @@ export class Converter {
 
   private determineMediaEmbed(resource: any) {
     switch (resource.mediaResourceType) {
+      case mediaTypes.MediaResourceMediumPost:
       case mediaTypes.MediaResourceExternalLink:
-        return this.formatIframe(resource)
+        if (resource.iframeSrc != '') {
+          return this.formatIframe(resource)
+        } else {
+          return `
+> [**${resource.title}**](${resource.href})
+>
+> <small>${resource.description}</small>
+`
+        }
 
       // NOTE: I have not come across this type yet, Will look into this post mvp
       case mediaTypes.MediaResourceTweet:
