@@ -19,6 +19,11 @@ export class Converter {
     const frontmatter = this.createFrontmatter(value, references)
     const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
+    // adding the section divider
+    sections.forEach((section: any, index: number) =>
+      formattedParagraphs.splice(section.startIndex + index, 0, '\n\n---\n\n')
+    )
+
     const content = this.prettifyMarkdown(frontmatter, formattedParagraphs)
 
     fs.writeFileSync('data/test.md', content, { encoding: 'utf-8' })
