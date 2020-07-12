@@ -3,6 +3,8 @@ import fs from 'fs'
 import { MediumHttpClient } from './client'
 import { paragraphTypes } from './Enums/paragraphTypes'
 import { mediaTypes } from './Enums/mediaTypes'
+import { markupTypes } from './Enums/markupTypes'
+import { anchorTypes } from './Enums/anchorTypes'
 
 const medium = new MediumHttpClient()
 
