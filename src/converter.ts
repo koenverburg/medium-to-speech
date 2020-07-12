@@ -147,9 +147,8 @@ export class Converter {
           return image
 
         case paragraphTypes.media:
-          // do api call to look up mediaResourceType
-          medium.getMediaResource(`https://medium.com/media/${iframe.mediaResourceId}?format=json`)
-          return text
+          console.log(mixtapeMetadata);
+          throw new Error(`Not Implemented Error paragraphType: ${paragraphTypes.media}`);
       }
 
       process.stdout.write(`${paragraph}\n`)
@@ -165,12 +164,11 @@ export class Converter {
       case mediaTypes.MediaResourceExternalLink:
         return this.formatIframe(resource)
 
+      // NOTE: I have not come across this type yet, Will look into this post mvp
       case mediaTypes.MediaResourceTweet:
-        return ''
-        // const { html } = await medium.getTweetEmbed(`https://publish.twitter.com/oembed?url=${resource.href}`)
-        // return html
-      case mediaTypes.MediaResourceMediumPost:
-        return ''
+        console.log(resource);
+        process.stdout.write(`${resource}\n`)
+        throw new Error(`Not Implemented Error mediaTypes: ${mediaTypes.MediaResourceTweet}`);
     }
 
     process.stdout.write(`${resource}\n`)
@@ -197,7 +195,7 @@ export class Converter {
     // references: {
     //   User: { // Or Collection, Social
     //      "<base64 string capped to 11 characters>" : {
-    //        ...user object
+    //        ...object
     //    }
     //   }
     // }
