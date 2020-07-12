@@ -33,7 +33,7 @@ export class Converter {
 
   private async formatParagraphs(paragraphs: any) {
     const results = paragraphs.map(async (paragraph: any, index: number) => {
-      const { text, type, iframe, metadata, mixtapeMetadata  } = paragraph;
+      const { text, type, iframe, metadata, mixtapeMetadata } = paragraph
 
       switch (type) {
         case paragraphTypes.paragraph:
