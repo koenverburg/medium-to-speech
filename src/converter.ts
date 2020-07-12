@@ -1,4 +1,5 @@
-import { paragraphTypes } from './Enums/paragraphTypes'
+import prettier from 'prettier'
+import fs from 'fs'
 import { MediumHttpClient } from './client'
 import { paragraphTypes } from './Enums/paragraphTypes'
 import { mediaTypes } from './Enums/mediaTypes'
@@ -18,7 +19,9 @@ export class Converter {
     const frontmatter = this.createFrontmatter(value, references)
     const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
-    this.formatParagraphs(paragraphs);
+    const content = this.prettifyMarkdown(frontmatter, formattedParagraphs)
+
+    fs.writeFileSync('data/test.md', content, { encoding: 'utf-8' })
 
     return ''
   }
@@ -137,5 +140,18 @@ Article Published at: ${firstPublishedAt}
 Article Updated at: ${latestPublishedAt}
 ---
 `
+  }
+
+  private prettifyMarkdown(frontmatter: string, formattedParagraphs: any) {
+    const results = prettier.format(
+      [frontmatter]
+        .concat(formattedParagraphs)
+        .join('\n\n'),
+      {
+        parser: 'markdown'
+      }
+    )
+
+    return results
   }
 }
