@@ -31,41 +31,112 @@ export class Converter {
     return ''
   }
 
+  private determineTextFormatting(text: string, markups: []) {
+    if (markups.length === 0) return text
+
+    let prefix = ''
+    let suffix = ''
+    let formattedText = text
+
+    const markup: any = markups.shift() // markups is an array with one item, using shift we can get the first item
+    switch (markup.type) {
+      case markupTypes.bold:
+        prefix = '**'
+        suffix = '**'
+        break
+
+      case markupTypes.italic:
+        prefix = '*'
+        suffix = '*'
+        break
+
+      case markupTypes.link:
+        prefix = '['
+
+        switch (markup.anchorType) {
+          case anchorTypes.externalLink:
+            suffix = `](${markup.href})`
+            break
+          case anchorTypes.internalLink:
+            suffix = `](https://medium.com/u/${markup.userId})`
+            break
+          default:
+            throw new Error(`Unsupported anchorType: ${markup.anchorType}`)
+        }
+
+        break
+
+      case markupTypes.inlineCode:
+        prefix = '`'
+        suffix = '`'
+        break
+
+      default:
+        throw new Error(`Unsupported markup type: ${markup.type}`)
+    }
+
+    // rewrite the text with formatting added
+    formattedText = this.formatText(formattedText, markup, prefix, suffix)
+
+    // Update the markups start and ends because we added more characters to render it to markdown
+    markups.forEach((mu: any) => {
+      if (mu.end <= markup.start) return
+
+      if (mu.start >= markup.end) {
+        mu.start += prefix.length + suffix.length
+        mu.end += prefix.length + suffix.length
+        return
+      }
+
+      mu.start += prefix.length
+      mu.end += prefix.length
+    })
+
+    return formattedText
+  }
+
+  private formatText(text: string, markup: any, prefix: string, suffix: string) {
+    return `${text.slice(0, markup.start)}${prefix}${text.slice(markup.start, markup.end)}${suffix}${text.slice(markup.end)}`
+  }
+
   private async formatParagraphs(paragraphs: any) {
     const results = paragraphs.map(async (paragraph: any, index: number) => {
       const { text, type, iframe, metadata, mixtapeMetadata } = paragraph
 
+      const formattedText = this.determineTextFormatting(text, paragraph.markups)
+
       switch (type) {
         case paragraphTypes.paragraph:
-            return text
+          return formattedText
 
         case paragraphTypes.h1:
             if (index === 0) { // ignore the first otherwise you have double titles
               return ''
             } else {
-              return `# ${text}`
+            return `# ${formattedText}`
             }
 
         case paragraphTypes.h3:
-          return `### ${text}`
+          // This is strange case because It looks like a h3 but on medium it renders as an blockquote
+          return `> ### ${formattedText}`
 
         case paragraphTypes.h4:
-          return `#### ${text}`
+          return `#### ${formattedText}`
 
         case paragraphTypes.quote:
-          return `> ${text}`
+          return `> ${formattedText}`
 
         case paragraphTypes.codeBlock:
-          return '```\n' + text + '\n```'
+          return '```\n' + formattedText + '\n```'
 
         case paragraphTypes.onOrderedList:
-          return `- ${text}`
+          return `- ${formattedText}`
 
         case paragraphTypes.orderedList:
-          return `1. ${text}`
+          return `- ${formattedText}`
 
         case paragraphTypes.image:
-          return `![${text}](https://cdn-images-1.medium.com/max/${metadata.originalWidth * 2}/${metadata.id})`
+          return `![${formattedText}](https://cdn-images-1.medium.com/max/${metadata.originalWidth * 2}/${metadata.id})`
 
         case paragraphTypes.imageWithDescription:
           // do api call to look up mediaResourceType
