@@ -5,3 +5,4 @@ articles.txt
 *.logs
 bin
 data/
+articles/
