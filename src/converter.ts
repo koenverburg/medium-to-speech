@@ -1,5 +1,6 @@
-import prettier from 'prettier'
 import fs from 'fs'
+import path from 'path'
+import prettier from 'prettier'
 import { MediumHttpClient } from './client'
 import { paragraphTypes } from './Enums/paragraphTypes'
 import { mediaTypes } from './Enums/mediaTypes'
@@ -18,6 +19,7 @@ export class Converter {
     const { value, references } = this.contents.payload;
     const { paragraphs, sections } = value.content.bodyModel;
 
+    const filePaths = this.prepareForSaving(value, references)
     const frontmatter = this.createFrontmatter(value, references)
     const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
@@ -28,9 +30,31 @@ export class Converter {
 
     const content = this.prettifyMarkdown(frontmatter, formattedParagraphs)
 
-    fs.writeFileSync('data/test.md', content, { encoding: 'utf-8' })
+    fs.writeFileSync(`${filePaths.markdownFilePath}/${filePaths.fileName}`, content, { encoding: 'utf-8' })
 
-    return ''
+    return {
+      path: '',
+      filename: ''
+    }
+  }
+
+  private prepareForSaving(value: any, references: any) {
+    const user = this.getUserObject(references)
+    // articles/:username/mp3/:username-slug
+    // articles/:username/markdown/:username-slug
+
+    const mp3FilePath = `articles/${user.username}/mp3` // helper
+    const markdownFilePath = `articles/${user.username}/markdown`
+
+    if (!fs.existsSync(mp3FilePath)) fs.mkdirSync(markdownFilePath, { recursive: true }) //  helper
+    if (!fs.existsSync(markdownFilePath)) fs.mkdirSync(markdownFilePath, { recursive: true })
+
+    const resolvedPath = path.resolve(__dirname, '..', markdownFilePath)
+
+    return {
+      fileName: `${user.username}_${value.slug}`, // helper
+      markdownFilePath: resolvedPath
+    }
   }
 
   private determineTextFormatting(text: string, markups: []) {
@@ -196,9 +220,7 @@ export class Converter {
     `
   }
 
-
-  private createFrontmatter(value: any, references: any) {
-    const { slug, title, firstPublishedAt, latestPublishedAt } = value
+  private getUserObject(references: any) {
     // References and the User, Collection, Social objects inside
     // are build using the following schema
     // references: {
@@ -211,8 +233,13 @@ export class Converter {
 
     const userReference = references['User']
     const userId = Object.keys(userReference)[0]
-    const user = userReference[userId]
+    return userReference[userId]
+  }
 
+
+  private createFrontmatter(value: any, references: any) {
+    const { slug, title, firstPublishedAt, latestPublishedAt } = value
+    const user = this.getUserObject(references)
     return `
 ---
 Author: ${user.name}
