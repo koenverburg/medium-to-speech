@@ -1,11 +1,13 @@
 import fs from 'fs'
+import say from 'say'
 import path from 'path'
 import prettier from 'prettier'
+import removeMarkdown from 'remove-markdown'
 import { MediumHttpClient } from './client'
-import { paragraphTypes } from './Enums/paragraphTypes'
 import { mediaTypes } from './Enums/mediaTypes'
 import { markupTypes } from './Enums/markupTypes'
 import { anchorTypes } from './Enums/anchorTypes'
+import { paragraphTypes } from './Enums/paragraphTypes'
 
 const medium = new MediumHttpClient()
 
