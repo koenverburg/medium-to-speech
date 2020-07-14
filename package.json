@@ -21,6 +21,7 @@
     "mediumexporter": "github:xdamman/mediumexporter#v0.2.0",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",
+    "remove-markdown": "^0.3.0",
     "say": "^0.16.0",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.6"
