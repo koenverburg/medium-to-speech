@@ -1,6 +1,5 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios'
 
-
 export class MediumHttpClient {
   private http: AxiosInstance
   private url: string;
