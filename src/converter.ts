@@ -3,11 +3,13 @@ import say from 'say'
 import path from 'path'
 import prettier from 'prettier'
 import removeMarkdown from 'remove-markdown'
+import sdk from 'microsoft-cognitiveservices-speech-sdk'
 import { MediumHttpClient } from './client'
 import { mediaTypes } from './Enums/mediaTypes'
 import { markupTypes } from './Enums/markupTypes'
 import { anchorTypes } from './Enums/anchorTypes'
 import { paragraphTypes } from './Enums/paragraphTypes'
+import { Speech } from './Speech'
 
 const medium = new MediumHttpClient()
 
@@ -21,7 +23,7 @@ export class Converter {
     const { value, references } = this.contents.payload;
     const { paragraphs, sections } = value.content.bodyModel;
 
-    const filePaths = this.prepareForSaving(value, references)
+    const fileConfig = this.prepareForSaving(value, references)
     const frontmatter = this.createFrontmatter(value, references)
     const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
@@ -30,13 +32,19 @@ export class Converter {
       formattedParagraphs.splice(section.startIndex + index, 0, '\n\n---\n\n')
     )
 
-    const content = this.prettifyMarkdown(frontmatter, formattedParagraphs)
+    const markdown = this.prettifyMarkdown(frontmatter, formattedParagraphs)
 
-    fs.writeFileSync(`${filePaths.markdownFilePath}/${filePaths.fileName}`, content, { encoding: 'utf-8' })
+    const text = this.prettifyMarkdown('', formattedParagraphs)
+    const rawText = removeMarkdown(text)
+    //  cleaning up some last remaining markdown bits
+    const cleanedText = rawText.replace(new RegExp(/(>.?)\s?|(###)/, 'gm'), '')
+
+    this.save(cleanedText, markdown, fileConfig)
 
     return {
-      path: '',
-      filename: ''
+      filename: fileConfig.filename,
+      mp3: fileConfig.mp3SavedIn,
+      markdown: fileConfig.markdownSavedIn,
     }
   }
 
@@ -45,18 +53,32 @@ export class Converter {
     // articles/:username/mp3/:username-slug
     // articles/:username/markdown/:username-slug
 
+    const filename = `${user.username}_${value.slug}` // helper
     const mp3FilePath = `articles/${user.username}/mp3` // helper
     const markdownFilePath = `articles/${user.username}/markdown`
 
-    if (!fs.existsSync(mp3FilePath)) fs.mkdirSync(markdownFilePath, { recursive: true }) //  helper
+    if (!fs.existsSync(mp3FilePath)) fs.mkdirSync(mp3FilePath, { recursive: true }) //  helper
     if (!fs.existsSync(markdownFilePath)) fs.mkdirSync(markdownFilePath, { recursive: true })
 
-    const resolvedPath = path.resolve(__dirname, '..', markdownFilePath)
+    const resolvedPathMp3 = path.resolve(__dirname, '..', mp3FilePath)
+    const resolvedPathMarkdown = path.resolve(__dirname, '..', markdownFilePath)
 
     return {
-      fileName: `${user.username}_${value.slug}`, // helper
-      markdownFilePath: resolvedPath
+      filename,
+      mp3SavedIn: resolvedPathMp3,
+      markdownSavedIn: resolvedPathMarkdown
     }
+  }
+
+  private save(rawText: string, markdownContent: string, fileConfig: any) {
+    const speechFile = `${fileConfig.mp3SavedIn}/${fileConfig.filename}.wav`
+    const markdownFile = `${fileConfig.markdownSavedIn}/${fileConfig.filename}.md`
+
+    // Save the Markdown variant of the article
+    fs.writeFileSync(markdownFile, markdownContent, { encoding: 'utf-8' })
+
+    const speech = new Speech()
+    speech.ConvertToAudioFile(rawText, speechFile)
   }
 
   private determineTextFormatting(text: string, markups: []) {
