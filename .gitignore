@@ -6,3 +6,4 @@ articles.txt
 bin
 data/
 articles/
+.env
