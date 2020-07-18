@@ -23,7 +23,7 @@ export class Converter {
     const { value, references } = this.contents.payload;
     const { paragraphs, sections } = value.content.bodyModel;
 
-    const fileConfig = this.prepareForSaving(value, references)
+    const fileConfig = this.createArticlePathConfig(value, references)
     const frontmatter = this.createFrontmatter(value, references)
     const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
@@ -42,43 +42,39 @@ export class Converter {
     this.save(cleanedText, markdown, fileConfig)
 
     return {
-      filename: fileConfig.filename,
-      mp3: fileConfig.mp3SavedIn,
-      markdown: fileConfig.markdownSavedIn,
+      article: fileConfig.articlePath,
+      audio: fileConfig.audioFilename,
+      markdown: fileConfig.markdownFilename,
     }
   }
 
-  private prepareForSaving(value: any, references: any) {
+  private createArticlePathConfig(value: any, references: any) {
     const user = this.getUserObject(references)
-    // articles/:username/mp3/:username-slug
-    // articles/:username/markdown/:username-slug
+    // articles/:username/:username-slug/:username-slug{.wav,.md}
 
-    const filename = `${user.username}_${value.slug}` // helper
-    const mp3FilePath = `articles/${user.username}/mp3` // helper
-    const markdownFilePath = `articles/${user.username}/markdown`
+    const namedSlug = `${user.username}_${value.slug}`
+    const articlePath = `articles/${user.username}/${namedSlug}`
 
-    if (!fs.existsSync(mp3FilePath)) fs.mkdirSync(mp3FilePath, { recursive: true }) //  helper
-    if (!fs.existsSync(markdownFilePath)) fs.mkdirSync(markdownFilePath, { recursive: true })
+    if (!fs.existsSync(articlePath)) fs.mkdirSync(articlePath, { recursive: true })
 
-    const resolvedPathMp3 = path.resolve(__dirname, '..', mp3FilePath)
-    const resolvedPathMarkdown = path.resolve(__dirname, '..', markdownFilePath)
+    const resolvedArticlePath = path.resolve(__dirname, '..', articlePath)
+    const audioFilename = path.resolve(__dirname, '..', articlePath, `${namedSlug}.wav`)
+    const markdownFilename = path.resolve(__dirname, '..', articlePath, `${namedSlug}.md`)
 
     return {
-      filename,
-      mp3SavedIn: resolvedPathMp3,
-      markdownSavedIn: resolvedPathMarkdown
+      namedSlug,
+      articlePath: resolvedArticlePath,
+      audioFilename,
+      markdownFilename
     }
   }
 
   private save(rawText: string, markdownContent: string, fileConfig: any) {
-    const speechFile = `${fileConfig.mp3SavedIn}/${fileConfig.filename}.wav`
-    const markdownFile = `${fileConfig.markdownSavedIn}/${fileConfig.filename}.md`
-
     // Save the Markdown variant of the article
-    fs.writeFileSync(markdownFile, markdownContent, { encoding: 'utf-8' })
+    fs.writeFileSync(fileConfig.markdownFilename, markdownContent, { encoding: 'utf-8' })
 
     const speech = new Speech()
-    speech.ConvertToAudioFile(rawText, speechFile)
+    speech.ConvertToAudioFile(rawText, fileConfig.audioFilename)
   }
 
   private determineTextFormatting(text: string, markups: []) {
