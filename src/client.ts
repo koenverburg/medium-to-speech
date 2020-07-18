@@ -10,10 +10,6 @@ export class MediumHttpClient {
   }
 
   public formatUrl(page: string) {
-    if (page.charAt(0) !== '/') {
-      page = '/' + page;
-    }
-
     return `${page}${page.indexOf('?') === -1 ? '?' : '&'}format=json`;
   }
 
@@ -42,11 +38,13 @@ export class MediumHttpClient {
       }).catch(err => this.handleError(err))
   }
 
-  public getArticle(url: string ) {
-    this.http.get(url)
-      .then(response => {
-        console.log(JSON.stringify(this.cleanData(response.data), null, 2));
-     }).catch(err => this.handleError(err))
+  public async getArticle(url: string) {
+    try {
+      const response = await this.http.get(this.formatUrl(url))
+      return this.cleanData(response.data)
+    }
+    catch (err) {
+      return this.handleError(err)
+    }
   }
-
 }
