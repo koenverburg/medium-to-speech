@@ -1,12 +1,22 @@
-import { MediumHttpClient } from './client'
-import { Converter } from './converter'
+require('dotenv').config()
 import fs from 'fs'
 import path from 'path'
+import { Converter } from './converter'
+import { MediumHttpClient } from './client'
 
-// const medium = new Client()
-// MediumHttpClient.getArticle('https://medium.com/javascript-in-plain-english/a-practical-guide-to-become-a-senior-frontend-developer-553ec50e2933')
+void (async () => {
+  const urls = [
+  ]
 
-const jsonContent = fs.readFileSync(path.resolve(__dirname, '..', 'data', 'rich-culture.response.json'))
+  const medium = new MediumHttpClient()
 
-const verter = new Converter(JSON.parse(jsonContent.toString()))
-verter.convert()
+  urls.forEach(async url => {
+    const jsonArticle = await medium.getArticle(url)
+
+    const verter = new Converter(jsonArticle)
+    const files = await verter.convert()
+
+    console.log('saved! in', files)
+  })
+
+})()
