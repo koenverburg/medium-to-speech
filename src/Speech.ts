@@ -23,18 +23,46 @@ export class Speech {
     const audioConfig = sdk.AudioConfig.fromStreamOutput(pullStream)
     const synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig)
 
-    console.log('Writing wav file...');
+    const chunks = this.createTextChunks(text, 2000)
 
+    console.log('Speech: Writing wav file...')
+    const audioParts = Promise.all(chunks.map(async (chunk: string, index: number) => {
+      await this.synthesizePerChunk(synthesizer, filename.replace('{index}', index.toString()), chunk, chunk.length < 2000)
+      return filename.replace('{index}', index.toString())
+    }))
+
+    return audioParts
+  }
     synthesizer.speakTextAsync(
       text,
       (r) => this.handleResponse(r, synthesizer),
       (e) => this.handleError(e, synthesizer),
       path.resolve(filename)
     )
+  private createTextChunks(text: string, chunkCharacterLimit: number) {
+    const chunks: string[] = []
+
+    console.log(`speech: text character count is ${text.length}`);
+    console.log(`speech: text chunks is split up in ${Math.ceil(text.length / chunkCharacterLimit)} (${text.length / chunkCharacterLimit}) chunks`)
+
+    for (var i = 0; Math.ceil(text.length / chunkCharacterLimit); i++) {
+      let fromIndex = i === 0 ? 0 : chunkCharacterLimit * i
+      let toIndex   = i === 0 ? chunkCharacterLimit : chunkCharacterLimit * (i + 1)
+
+      let chunkedText = text.substring(fromIndex, toIndex)
+
+      chunks.push(chunkedText)
+
+      if (chunkedText.length < chunkCharacterLimit) {
+        break
+      }
+    }
+
+    return chunks
   }
 
   private handleResponse(results: any, synthesizer: sdk.SpeechSynthesizer) {
-    console.log(results)
+    console.log(`SpeechSynthesizer Response ${results.privResultId}`)
     synthesizer.close()
   }
 
