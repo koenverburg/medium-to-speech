@@ -14,14 +14,14 @@ import { Speech } from './Speech'
 const medium = new MediumHttpClient()
 
 export class Converter {
-  contents: any
+  private contents: any
   constructor(contents: object) {
     this.contents = contents
   }
 
   public async convert() {
-    const { value, references } = this.contents.payload;
-    const { paragraphs, sections } = value.content.bodyModel;
+    const { value, references } = this.contents.payload
+    const { paragraphs, sections } = value.content.bodyModel
 
     const fileConfig = this.createArticlePathConfig(value, references)
     const frontmatter = this.createFrontmatter(value, references)
@@ -39,12 +39,13 @@ export class Converter {
     //  cleaning up some last remaining markdown bits
     const cleanedText = rawText.replace(new RegExp(/(>.?)\s?|(###)/, 'gm'), '')
 
-    this.save(cleanedText, markdown, fileConfig)
+    const audioFiles = await this.save(cleanedText, markdown, fileConfig)
 
     return {
       article: fileConfig.articlePath,
-      audio: fileConfig.audioFilename,
       markdown: fileConfig.markdownFilename,
+      audioFile: fileConfig.audioFilename,
+      audioFiles,
     }
   }
 
@@ -54,27 +55,36 @@ export class Converter {
 
     const namedSlug = `${user.username}_${value.slug}`
     const articlePath = `articles/${user.username}/${namedSlug}`
+    const articleAudioChunksPath = `articles/${user.username}/${namedSlug}/chunks`
 
-    if (!fs.existsSync(articlePath)) fs.mkdirSync(articlePath, { recursive: true })
+    if (!fs.existsSync(articlePath))
+      fs.mkdirSync(articlePath, { recursive: true })
+
+    if (!fs.existsSync(articleAudioChunksPath))
+      fs.mkdirSync(articleAudioChunksPath, { recursive: true })
 
     const resolvedArticlePath = path.resolve(__dirname, '..', articlePath)
-    const audioFilename = path.resolve(__dirname, '..', articlePath, `${namedSlug}.wav`)
-    const markdownFilename = path.resolve(__dirname, '..', articlePath, `${namedSlug}.md`)
+    const markdownFilename    = path.resolve(__dirname, '..', articlePath, `${namedSlug}.md`)
+    const audioFilename       = path.resolve(__dirname, '..', articlePath, `${namedSlug}.wav`)
+    const audioChunkFilename  = path.resolve(__dirname, '..', articleAudioChunksPath, `${namedSlug}-{index}.wav`)
 
     return {
       namedSlug,
       articlePath: resolvedArticlePath,
       audioFilename,
-      markdownFilename
+      markdownFilename,
+      audioChunkFilename
     }
   }
 
-  private save(rawText: string, markdownContent: string, fileConfig: any) {
+  private async save(rawText: string, markdownContent: string, fileConfig: any) {
     // Save the Markdown variant of the article
     fs.writeFileSync(fileConfig.markdownFilename, markdownContent, { encoding: 'utf-8' })
 
     const speech = new Speech()
-    speech.ConvertToAudioFile(rawText, fileConfig.audioFilename)
+    const audioFiles = await speech.ConvertToAudioFile(rawText, fileConfig.audioChunkFilename)
+
+    return audioFiles
   }
 
   private determineTextFormatting(text: string, markups: []) {
@@ -190,9 +200,10 @@ export class Converter {
           const image = this.determineMediaEmbed(resource)
           return image
 
-        case paragraphTypes.media:
-          console.log(mixtapeMetadata);
-          throw new Error(`Not Implemented Error paragraphType: ${paragraphTypes.media}`);
+        case paragraphTypes.iframeMedia:
+          // console.log(mixtapeMetadata);
+          // throw new Error(`Not Implemented Error paragraphType: ${paragraphTypes.media}`);
+          return formattedText
       }
 
       process.stdout.write(`${paragraph}\n`)
