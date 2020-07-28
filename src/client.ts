@@ -14,9 +14,7 @@ export class MediumHttpClient {
   }
 
   private cleanData(data: any) {
-    const substringed = data.substring(data.indexOf('{'))
-
-    return JSON.parse(substringed)
+    return JSON.parse(data.substring(data.indexOf('{')))
   }
 
   private handleError(err: AxiosError) {

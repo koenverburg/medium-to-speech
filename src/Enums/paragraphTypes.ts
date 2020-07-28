@@ -7,7 +7,7 @@ export enum paragraphTypes {
   codeBlock = 8,
   onOrderedList = 9,
   orderedList = 10,
-  media = 11,
+  iframeMedia = 11,
   h4 = 13,
   imageWithDescription = 14
 }
