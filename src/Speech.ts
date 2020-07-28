@@ -3,7 +3,7 @@ import path from 'path'
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk'
 
 export class Speech {
-  public ConvertToAudioFile(text: string, filename: string) {
+  public async ConvertToAudioFile(text: string, filename: string) {
     // We can't write directly to a file so we need to write to it from a stream
     const pullStream = sdk.AudioOutputStream.createPullStream()
 
