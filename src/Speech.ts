@@ -33,12 +33,26 @@ export class Speech {
 
     return audioParts
   }
+
+  private synthesizePerChunk(synthesizer: sdk.SpeechSynthesizer, filename: string, textChunk: string, isLast: boolean) {
+    const isLastOrHandleResponse = (resolve: any) => (r: any) => {
+      this.handleResponse(r, synthesizer)
+      resolve(r)
+    }
+
+    return new Promise((resolve, reject) => {
     synthesizer.speakTextAsync(
-      text,
-      (r) => this.handleResponse(r, synthesizer),
-      (e) => this.handleError(e, synthesizer),
+          textChunk,
+          isLast ? isLastOrHandleResponse(resolve) : undefined,
+          (e) => {
+            reject(e)
+            this.handleError(e, synthesizer)
+          },
       path.resolve(filename)
     )
+    })
+  }
+
   private createTextChunks(text: string, chunkCharacterLimit: number) {
     const chunks: string[] = []
 
