@@ -10,20 +10,28 @@ import { markupTypes } from './Enums/markupTypes'
 import { anchorTypes } from './Enums/anchorTypes'
 import { paragraphTypes } from './Enums/paragraphTypes'
 import { Speech } from './Speech'
+import { Util } from './Helpers/Utils'
+import { StorageService } from './Services/StorageService'
+import { IConverter } from './Interfaces/IConverter'
 
 const medium = new MediumHttpClient()
 
-export class Converter {
+export class Converter implements IConverter {
   private contents: any
+  private _storageService: StorageService
+  private formattedParagraphs: string[]
+
   constructor(contents: object) {
     this.contents = contents
+    const { value, references } = this.contents.payload
+    this._storageService = new StorageService(value, references)
   }
 
   public async convert() {
     const { value, references } = this.contents.payload
     const { paragraphs, sections } = value.content.bodyModel
 
-    const fileConfig = this.createArticlePathConfig(value, references)
+    const fileConfig = this._storageService.createArticleFolder()
     const frontmatter = this.createFrontmatter(value, references)
     const formattedParagraphs = await this.formatParagraphs(paragraphs)
 
