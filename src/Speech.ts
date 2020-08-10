@@ -3,18 +3,9 @@ import path from 'path'
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk'
 
 export class Speech {
-  public async ConvertToAudioFile(text: string, filename: string) {
+  public async ConvertToAudioFile(filename: string, filenameChunk: string, text: string) {
     // We can't write directly to a file so we need to write to it from a stream
     const pullStream = sdk.AudioOutputStream.createPullStream()
-
-    fs
-      .createWriteStream(filename)
-      .on('data', (arrayBuffer: ArrayBuffer) => {
-        pullStream.read(arrayBuffer.slice(0))
-      })
-      .on('end', () => {
-        pullStream.close()
-      })
 
     // @ts-ignore
     const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.AZURE_SPEECH_SERVICE_KEY, process.env.AZURE_REGION)
@@ -25,10 +16,35 @@ export class Speech {
 
     const chunks = this.createTextChunks(text, 2000)
 
+    // create a logger to create nice-er looking logs
+    synthesizer.synthesisStarted = function (s, e) {
+      console.log("(synthesis started)")
+    }
+
+    // synthesizer.synthesizing = function (s, e) {
+    //   var str = "(synthesizing) Reason: " + sdk.ResultReason[e.result.reason] + " Audio chunk length: " + e.result.audioData.byteLength;
+    //   console.log(str)
+    // }
+
+    synthesizer.synthesisCompleted = function (s, e) {
+      console.log("(synthesized) Reason: " + sdk.ResultReason[e.result.reason] + " Audio length: " + e.result.audioData.byteLength)
+    }
+
+    // synthesizer.SynthesisCanceled = function (s, e) {
+    //   var cancellationDetails = sdk.CancellationDetails.fromResult(e.result)
+    //   var str = "(cancel) Reason: " + sdk.CancellationReason[cancellationDetails.reason]
+
+    //   if (cancellationDetails.reason === sdk.CancellationReason.Error) {
+    //     str += ": " + e.result.errorDetails
+    //   }
+    //   console.log(str)
+    // }
+
     console.log('Speech: Writing wav file...')
-    const audioParts = Promise.all(chunks.map(async (chunk: string, index: number) => {
-      await this.synthesizePerChunk(synthesizer, filename.replace('{index}', index.toString()), chunk, chunk.length < 2000)
-      return filename.replace('{index}', index.toString())
+
+    const audioParts = await Promise.all(chunks.map((chunk: string, index: number) => {
+      this.synthesizePerChunk(synthesizer, filenameChunk.replace('{index}', index.toString()), chunk, chunk.length < 2000)
+      return filenameChunk.replace('{index}', index.toString())
     }))
 
     return audioParts
@@ -41,15 +57,15 @@ export class Speech {
     }
 
     return new Promise((resolve, reject) => {
-    synthesizer.speakTextAsync(
+        synthesizer.speakTextAsync(
           textChunk,
           isLast ? isLastOrHandleResponse(resolve) : undefined,
           (e) => {
             reject(e)
             this.handleError(e, synthesizer)
           },
-      path.resolve(filename)
-    )
+          filename
+        )
     })
   }
 
