@@ -1,6 +1,6 @@
 export interface IConverter {
   toMarkdownAsync(): Promise<MarkdownResponse>,
-  toRawText(): TextResponse
+  toRawTextAsync(): Promise<TextResponse>
 }
 
 type MarkdownResponse = {
@@ -9,5 +9,7 @@ type MarkdownResponse = {
 }
 
 type TextResponse = {
+  filename: string,
+  filenameChunks: string,
   content: string
 }
