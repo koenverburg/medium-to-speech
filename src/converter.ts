@@ -1,9 +1,7 @@
 import fs from 'fs'
-import say from 'say'
 import path from 'path'
 import prettier from 'prettier'
 import removeMarkdown from 'remove-markdown'
-import sdk from 'microsoft-cognitiveservices-speech-sdk'
 import { MediumHttpClient } from './client'
 import { mediaTypes } from './Enums/mediaTypes'
 import { markupTypes } from './Enums/markupTypes'
@@ -25,6 +23,47 @@ export class Converter implements IConverter {
     this.contents = contents
     const { value, references } = this.contents.payload
     this._storageService = new StorageService(value, references)
+  }
+
+  public async toMarkdownAsync() {
+    const { value, references } = this.contents.payload
+    const { paragraphs, sections } = value.content.bodyModel
+
+    const fileConfig = this._storageService.createArticleFolder()
+    const frontmatter = this.createFrontmatter(value, references)
+    const formattedParagraphs = await this.formatParagraphs(paragraphs)
+
+    // adding the section divider
+    sections.forEach((section: any, index: number) =>
+      formattedParagraphs.splice(section.startIndex + index, 0, '\n\n---\n\n')
+    )
+    const markdown = this.prettifyMarkdown(frontmatter, formattedParagraphs)
+    this.formattedParagraphs = formattedParagraphs
+
+    return {
+      content: markdown,
+      filename: fileConfig.markdownFilename
+    }
+  }
+
+  public async toRawTextAsync() {
+    if (!this.formattedParagraphs) {
+      await this.toMarkdownAsync()
+    }
+
+    const fileConfig = this._storageService.createArticleFolder()
+
+    const text = this.prettifyMarkdown('', this.formattedParagraphs)
+    const rawText = removeMarkdown(text)
+
+    //  cleaning up some last remaining markdown bits
+    const cleanedText = rawText.replace(new RegExp(/(>.?)\s?|(###)/, 'gm'), '')
+
+    return {
+      content: cleanedText,
+      filename: fileConfig.audioFilename,
+      filenameChunks: fileConfig.audioChunkFilename,
+    }
   }
 
   public async convert() {
@@ -57,40 +96,12 @@ export class Converter implements IConverter {
     }
   }
 
-  private createArticlePathConfig(value: any, references: any) {
-    const user = this.getUserObject(references)
-    // articles/:username/:username-slug/:username-slug{.wav,.md}
-
-    const namedSlug = `${user.username}_${value.slug}`
-    const articlePath = `articles/${user.username}/${namedSlug}`
-    const articleAudioChunksPath = `articles/${user.username}/${namedSlug}/chunks`
-
-    if (!fs.existsSync(articlePath))
-      fs.mkdirSync(articlePath, { recursive: true })
-
-    if (!fs.existsSync(articleAudioChunksPath))
-      fs.mkdirSync(articleAudioChunksPath, { recursive: true })
-
-    const resolvedArticlePath = path.resolve(__dirname, '..', articlePath)
-    const markdownFilename    = path.resolve(__dirname, '..', articlePath, `${namedSlug}.md`)
-    const audioFilename       = path.resolve(__dirname, '..', articlePath, `${namedSlug}.wav`)
-    const audioChunkFilename  = path.resolve(__dirname, '..', articleAudioChunksPath, `${namedSlug}-{index}.wav`)
-
-    return {
-      namedSlug,
-      articlePath: resolvedArticlePath,
-      audioFilename,
-      markdownFilename,
-      audioChunkFilename
-    }
-  }
-
   private async save(rawText: string, markdownContent: string, fileConfig: any) {
     // Save the Markdown variant of the article
     fs.writeFileSync(fileConfig.markdownFilename, markdownContent, { encoding: 'utf-8' })
 
     const speech = new Speech()
-    const audioFiles = await speech.ConvertToAudioFile(rawText, fileConfig.audioChunkFilename)
+    const audioFiles = await speech.ConvertToAudioFile(fileConfig.audioFilename, fileConfig.audioChunkFilename, rawText)
 
     return audioFiles
   }
@@ -163,7 +174,7 @@ export class Converter implements IConverter {
     return `${text.slice(0, markup.start)}${prefix}${text.slice(markup.start, markup.end)}${suffix}${text.slice(markup.end)}`
   }
 
-  private async formatParagraphs(paragraphs: any) {
+  private formatParagraphs(paragraphs: any) {
     const results = paragraphs.map(async (paragraph: any, index: number) => {
       const { text, type, iframe, metadata, mixtapeMetadata } = paragraph
 
@@ -218,7 +229,7 @@ export class Converter implements IConverter {
       throw new Error(`Unsupported type: ${type}`);
     })
 
-    return await Promise.all(results)
+    return Promise.all<string>(results)
   }
 
 
@@ -238,7 +249,7 @@ export class Converter implements IConverter {
 
       // NOTE: I have not come across this type yet, Will look into this post mvp
       case mediaTypes.MediaResourceTweet:
-        console.log(resource);
+        // console.log(resource);
         process.stdout.write(`${resource}\n`)
         throw new Error(`Not Implemented Error mediaTypes: ${mediaTypes.MediaResourceTweet}`);
     }
@@ -259,26 +270,9 @@ export class Converter implements IConverter {
     `
   }
 
-  private getUserObject(references: any) {
-    // References and the User, Collection, Social objects inside
-    // are build using the following schema
-    // references: {
-    //   User: { // Or Collection, Social
-    //      "<base64 string capped to 11 characters>" : {
-    //        ...object
-    //    }
-    //   }
-    // }
-
-    const userReference = references['User']
-    const userId = Object.keys(userReference)[0]
-    return userReference[userId]
-  }
-
-
   private createFrontmatter(value: any, references: any) {
     const { slug, title, firstPublishedAt, latestPublishedAt } = value
-    const user = this.getUserObject(references)
+    const user = Util.getUserObject(references)
     return `
 ---
 Author: ${user.name}
