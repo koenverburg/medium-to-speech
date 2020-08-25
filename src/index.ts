@@ -13,8 +13,6 @@ void (async () => {
   const httpClient = new MediumHttpClient()
 
   urls.forEach(async url => {
-    const jsonArticle = await medium.getArticle(url)
-
     const jsonArticle = await httpClient.getArticle(url)
     const converter = new Converter(jsonArticle)
     const speechConverter = new Speech()
@@ -23,10 +21,14 @@ void (async () => {
       StorageService.saveMarkdownFile(markdown.filename, markdown.content)
   })
 
-    converter.toRawTextAsync().then(text => {
-      speechConverter.ConvertToAudioFile(text.filename, text.filenameChunks, text.content).then(results => {
-        console.log('results', results);
-      })
+    const textConfig = await converter.toRawTextAsync()
+
+    speechConverter.ConvertToAudioFile(
+      textConfig.content,
+      textConfig.filenameChunks,
+      textConfig.filename
+    ).then(data => {
+      console.log('data', data);
     })
 
   })
