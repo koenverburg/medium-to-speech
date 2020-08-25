@@ -1,5 +1,3 @@
-import fs from 'fs'
-import path from 'path'
 import prettier from 'prettier'
 import removeMarkdown from 'remove-markdown'
 import { MediumHttpClient } from './client'
@@ -7,7 +5,6 @@ import { mediaTypes } from './Enums/mediaTypes'
 import { markupTypes } from './Enums/markupTypes'
 import { anchorTypes } from './Enums/anchorTypes'
 import { paragraphTypes } from './Enums/paragraphTypes'
-import { Speech } from './Speech'
 import { Util } from './Helpers/Utils'
 import { StorageService } from './Services/StorageService'
 import { IConverter } from './Interfaces/IConverter'
@@ -63,47 +60,8 @@ export class Converter implements IConverter {
       content: cleanedText,
       filename: fileConfig.audioFilename,
       filenameChunks: fileConfig.audioChunkFilename,
+      chunksDirectory: fileConfig.audioChunksDirectory
     }
-  }
-
-  public async convert() {
-    const { value, references } = this.contents.payload
-    const { paragraphs, sections } = value.content.bodyModel
-
-    const fileConfig = this._storageService.createArticleFolder()
-    const frontmatter = this.createFrontmatter(value, references)
-    const formattedParagraphs = await this.formatParagraphs(paragraphs)
-
-    // adding the section divider
-    sections.forEach((section: any, index: number) =>
-      formattedParagraphs.splice(section.startIndex + index, 0, '\n\n---\n\n')
-    )
-
-    const markdown = this.prettifyMarkdown(frontmatter, formattedParagraphs)
-
-    const text = this.prettifyMarkdown('', formattedParagraphs)
-    const rawText = removeMarkdown(text)
-    //  cleaning up some last remaining markdown bits
-    const cleanedText = rawText.replace(new RegExp(/(>.?)\s?|(###)/, 'gm'), '')
-
-    const audioFiles = await this.save(cleanedText, markdown, fileConfig)
-
-    return {
-      article: fileConfig.articlePath,
-      markdown: fileConfig.markdownFilename,
-      audioFile: fileConfig.audioFilename,
-      audioFiles,
-    }
-  }
-
-  private async save(rawText: string, markdownContent: string, fileConfig: any) {
-    // Save the Markdown variant of the article
-    fs.writeFileSync(fileConfig.markdownFilename, markdownContent, { encoding: 'utf-8' })
-
-    const speech = new Speech()
-    const audioFiles = await speech.ConvertToAudioFile(fileConfig.audioFilename, fileConfig.audioChunkFilename, rawText)
-
-    return audioFiles
   }
 
   private determineTextFormatting(text: string, markups: []) {
@@ -271,7 +229,7 @@ export class Converter implements IConverter {
   }
 
   private createFrontmatter(value: any, references: any) {
-    const { slug, title, firstPublishedAt, latestPublishedAt } = value
+    const { mediumUrl, title, firstPublishedAt, latestPublishedAt } = value
     const user = Util.getUserObject(references)
     return `
 ---
@@ -279,10 +237,11 @@ Author: ${user.name}
 Bio: ${user.bio}
 Title: ${title}
 Medium Author: https://medium.com/@${user.username}
-Medium Article: ${slug}
+Medium Article: ${mediumUrl}
 Twitter: https://twitter.com/${user.twitterScreenName}
 Article Published at: ${firstPublishedAt}
 Article Updated at: ${latestPublishedAt}
+Read: false
 ---
 `
   }
