@@ -1,10 +1,8 @@
 require('dotenv').config()
-import fs from 'fs'
-import path from 'path'
+import { Speech } from './Speech'
 import { Converter } from './converter'
 import { MediumHttpClient } from './client'
 import { StorageService } from './Services/StorageService'
-import { Speech } from './Speech'
 
 void (async () => {
   const urls = [
