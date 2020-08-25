@@ -1,20 +1,29 @@
+import * as sdk from 'microsoft-cognitiveservices-speech-sdk'
 import fs from 'fs'
 import path from 'path'
-import * as sdk from 'microsoft-cognitiveservices-speech-sdk'
+import chokidar from 'chokidar'
+import { FileMerge } from './Helpers/FileMerge'
 
 export class Speech {
-  public async ConvertToAudioFile(text: string, filename: string) {
+  public async ConvertToAudioFile(text: string, filenameChunk: string, filename: string) {
+    const files = await this.createChunkedAudioFiles(text, filenameChunk)
+    FileMerge.merge(files, filename)
+    return Promise.resolve('ok')
+  }
+
+  private async createChunkedAudioFiles(text: string, filenameChunk: string): Promise<string[]> {
+    const chunks = this.createTextChunks(text, 2000)
+
+    console.log('Speech: Writing wav file...')
+
+    return await Promise.all(chunks.map(async (chunk: string, index: number) =>
+      this.synthesizePerChunk(filenameChunk.replace('{index}', index.toString()), chunk)
+    ))
+  }
+
+  private synthesizePerChunk(filename: string, textChunk: string): Promise<string> {
     // We can't write directly to a file so we need to write to it from a stream
     const pullStream = sdk.AudioOutputStream.createPullStream()
-
-    fs
-      .createWriteStream(filename)
-      .on('data', (arrayBuffer: ArrayBuffer) => {
-        pullStream.read(arrayBuffer.slice(0))
-      })
-      .on('end', () => {
-        pullStream.close()
-      })
 
     // @ts-ignore
     const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.AZURE_SPEECH_SERVICE_KEY, process.env.AZURE_REGION)
@@ -23,33 +32,45 @@ export class Speech {
     const audioConfig = sdk.AudioConfig.fromStreamOutput(pullStream)
     const synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig)
 
-    const chunks = this.createTextChunks(text, 2000)
+    // create a logger to create nice-er looking logs
+    // synthesizer.synthesisStarted = function (s, e) {
+    //   console.log("(synthesis started)")
+    // }
 
-    console.log('Speech: Writing wav file...')
-    const audioParts = Promise.all(chunks.map(async (chunk: string, index: number) => {
-      await this.synthesizePerChunk(synthesizer, filename.replace('{index}', index.toString()), chunk, chunk.length < 2000)
-      return filename.replace('{index}', index.toString())
-    }))
+    // synthesizer.synthesizing = function (s, e) {
+    //   var str = "(synthesizing) Reason: " + sdk.ResultReason[e.result.reason] + " Audio chunk length: " + e.result.audioData.byteLength;
+    //   console.log(str)
+    // }
 
-    return audioParts
-  }
+    // synthesizer.synthesisCompleted = function (s, e) {
+    //   console.log("(synthesized) Reason: " + sdk.ResultReason[e.result.reason] + " Audio length: " + e.result.audioData.byteLength)
+    // }
 
-  private synthesizePerChunk(synthesizer: sdk.SpeechSynthesizer, filename: string, textChunk: string, isLast: boolean) {
-    const isLastOrHandleResponse = (resolve: any) => (r: any) => {
-      this.handleResponse(r, synthesizer)
-      resolve(r)
-    }
+    // synthesizer.SynthesisCanceled = function (s, e) {
+    //   var cancellationDetails = sdk.CancellationDetails.fromResult(e.result)
+    //   var str = "(cancel) Reason: " + sdk.CancellationReason[cancellationDetails.reason]
+
+    //   if (cancellationDetails.reason === sdk.CancellationReason.Error) {
+    //     str += ": " + e.result.errorDetails
+    //   }
+    //   console.log(str)
+    // }
 
     return new Promise((resolve, reject) => {
-    synthesizer.speakTextAsync(
-          textChunk,
-          isLast ? isLastOrHandleResponse(resolve) : undefined,
-          (e) => {
-            reject(e)
-            this.handleError(e, synthesizer)
-          },
-      path.resolve(filename)
-    )
+      synthesizer.speakTextAsync(
+        textChunk,
+        (r: any) => {
+          console.log(`SpeechSynthesizer Response ${r.privResultId}`)
+          resolve(filename)
+          synthesizer.close()
+        },
+        (e) => {
+          console.log(e)
+          synthesizer.close()
+          reject(e)
+        },
+        filename
+      )
     })
   }
 
@@ -73,15 +94,5 @@ export class Speech {
     }
 
     return chunks
-  }
-
-  private handleResponse(results: any, synthesizer: sdk.SpeechSynthesizer) {
-    console.log(`SpeechSynthesizer Response ${results.privResultId}`)
-    synthesizer.close()
-  }
-
-  private handleError(err: any, synthesizer: sdk.SpeechSynthesizer) {
-    console.log(err)
-    synthesizer.close()
   }
 }

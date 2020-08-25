@@ -7,19 +7,21 @@ interface IStorageService {
 }
 
 type FileConfig = {
-  articlePath: string,
+  articleDirectory: string,
   audioFilename: string,
   markdownFilename: string,
   audioChunkFilename: string,
+  audioChunksDirectory: string,
 }
 
-export class StorageService implements IStorageService{
+export class StorageService implements IStorageService {
   private value: any
   private references: any
-  public resolvedArticlePath: string
+  public resolvedArticleDirectory: string
   public markdownFilename: string
   public audioFilename: string
   public audioChunkFilename: string
+  public resolvedArticleAudioChunksDirectory: string
 
   constructor(value: any, references: any) {
     this.value = value
@@ -42,7 +44,8 @@ export class StorageService implements IStorageService{
     if (!fs.existsSync(articleAudioChunksPath))
       fs.mkdirSync(articleAudioChunksPath, { recursive: true })
 
-    this.resolvedArticlePath = path.resolve(__dirname, '..', articlePath)
+    this.resolvedArticleDirectory = path.resolve(__dirname, '..', articlePath)
+    this.resolvedArticleAudioChunksDirectory = path.resolve(__dirname, '..', articleAudioChunksPath)
 
     this.markdownFilename    = path.resolve(__dirname, '..', articlePath, `${namedSlug}.md`)
     this.audioFilename       = path.resolve(__dirname, '..', articlePath, `${namedSlug}.wav`)
@@ -51,10 +54,11 @@ export class StorageService implements IStorageService{
 
   public createArticleFolder() {
     return {
-      articlePath: this.resolvedArticlePath,
+      articleDirectory: this.resolvedArticleDirectory,
       audioFilename: this.audioFilename,
       markdownFilename: this.markdownFilename,
-      audioChunkFilename: this.audioChunkFilename
+      audioChunkFilename: this.audioChunkFilename,
+      audioChunksDirectory: this.resolvedArticleAudioChunksDirectory
     }
   }
 
