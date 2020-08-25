@@ -17,7 +17,7 @@ void (async () => {
 
     converter.toMarkdownAsync().then(markdown => {
       StorageService.saveMarkdownFile(markdown.filename, markdown.content)
-  })
+   })
 
     const textConfig = await converter.toRawTextAsync()
 
