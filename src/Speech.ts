@@ -1,7 +1,4 @@
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk'
-import fs from 'fs'
-import path from 'path'
-import chokidar from 'chokidar'
 import { FileMerge } from './Helpers/FileMerge'
 
 export class Speech {
