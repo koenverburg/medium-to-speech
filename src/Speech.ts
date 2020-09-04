@@ -4,8 +4,11 @@ import { FileMerge } from './Helpers/FileMerge'
 export class Speech {
   public async ConvertToAudioFile(text: string, filenameChunk: string, filename: string) {
     const files = await this.createChunkedAudioFiles(text, filenameChunk)
-    FileMerge.merge(files, filename)
-    return Promise.resolve('ok')
+
+    return setTimeout(() => {
+      FileMerge.merge(files, filename)
+      return Promise.resolve('ok')
+    }, 400);
   }
 
   private async createChunkedAudioFiles(text: string, filenameChunk: string): Promise<string[]> {
