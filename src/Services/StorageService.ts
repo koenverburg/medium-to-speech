@@ -49,7 +49,7 @@ export class StorageService implements IStorageService {
 
     this.markdownFilename    = path.resolve(__dirname, '..', articlePath, `${namedSlug}.md`)
     this.audioFilename       = path.resolve(__dirname, '..', articlePath, `${namedSlug}.wav`)
-    this.audioChunkFilename  = path.resolve(__dirname, '..', articleAudioChunksPath, `${namedSlug}-{index}.wav`)
+    this.audioChunkFilename  = path.resolve(__dirname, '..', articleAudioChunksPath, `chunk-{index}.wav`)
   }
 
   public createArticleFolder() {
