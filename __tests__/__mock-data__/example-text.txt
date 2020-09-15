@@ -1,0 +1,52 @@
+
+This also applies to new Frameworks and Tooling!
+
+Photo by Kelly Sikkema on Unsplash
+
+We as developers always need to stay up to date with new frameworks, tools, and new languages.
+
+So having a strategy that you can use to get to know a new language, framework or tool is beneficial in the long run.
+
+Since I started with programming I have been writing scripts. All kinds of scripts, from simple utils scripts to web scrapers and command-line tools.
+
+Because of this I use writing scripts as a strategy to learn a new programming language. Over the years I added APIs and web-apps to my learning strategy.
+
+For example, when I wanted to learn Elixir I wrote a script. When I wanted to learn C# I wrote an API and web app.
+
+How can you find your strategy?
+
+Find a topic or idea that you would like to build or work on
+
+I can spend hours on a CLI program/tool to make my code look perfect and also optimize the interaction as a user of the program or tool.
+
+You need to find something that you love to spend hours tinkering on. This way you can easily motivate yourself to get started with it and keep up the momentum.
+
+2. Keep the final result in mind
+
+You could get stuck or blocked when you try and create something without having a final result in mind.
+
+For instance, if you want to learn a new programming language, the final result could be that you want your knowledge of the new programming language to be as good as (or even better than) the programming Languages you already know.
+
+For me, when I wanted to learn C#, I decided to write a REST API as this is one of my go-to strategies. Writing a REST API is very straight forward and the tutorials for that are easy to find.
+
+3. Think about the future
+
+Ask yourself the following question:
+
+ Why do I want to learn X?
+
+Will this allow you to progress in your current job or set you up to
+move into a new job?
+move into that much wanted new job?
+move into a different branch/area of work?
+
+Will it just be for occasional use as a hobby or are you going to be using it on a daily basis?
+
+Do you want to learn “Insert new JavaScript Framework here”? Is it going to solve a problem you face or will it make your development experience easier?
+
+I ask myself these questions every time a new Langauge or Framework pops up. This is also how I opted to learn ReactJS rather than VueJS — firstly, I like ReactJS, and secondly, I use reactJS on a daily basis at work.
+
+Conclusion
+
+Find a programming topic you like, define the final result, and GO!
+Keep the final result in mind while developing and never give up, you may rest, but not give up!
