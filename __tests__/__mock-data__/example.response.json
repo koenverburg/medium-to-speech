@@ -1,0 +1,1267 @@
+{
+  "success": true,
+  "payload": {
+    "value": {
+      "id": "fa7771c0d3eb",
+      "versionId": "4991502cbe08",
+      "creatorId": "405b29f48feb",
+      "homeCollectionId": "f5af2b715248",
+      "title": "How to Learn a New Programming Language Quickly",
+      "detectedLanguage": "en",
+      "latestVersion": "4991502cbe08",
+      "latestPublishedVersion": "4991502cbe08",
+      "hasUnpublishedEdits": false,
+      "latestRev": 742,
+      "createdAt": 1592221352146,
+      "updatedAt": 1600118695490,
+      "acceptedAt": 0,
+      "firstPublishedAt": 1600011645457,
+      "latestPublishedAt": 1600118687514,
+      "vote": false,
+      "experimentalCss": "",
+      "displayAuthor": "",
+      "content": {
+        "subtitle": "This also applies to new Frameworks and Tooling!",
+        "bodyModel": {
+          "paragraphs": [
+            {
+              "name": "d612",
+              "type": 3,
+              "text": "How to Learn a New Programming Language Quickly",
+              "markups": []
+            },
+            {
+              "name": "968f",
+              "type": 13,
+              "text": "This also applies to new Frameworks and Tooling!",
+              "markups": []
+            },
+            {
+              "name": "0a07",
+              "type": 4,
+              "text": "Photo by Kelly Sikkema on Unsplash",
+              "markups": [
+                {
+                  "type": 3,
+                  "start": 9,
+                  "end": 22,
+                  "href": "https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral",
+                  "title": "",
+                  "rel": "photo-creator",
+                  "anchorType": 0
+                },
+                {
+                  "type": 3,
+                  "start": 26,
+                  "end": 34,
+                  "href": "https://unsplash.com?utm_source=medium&utm_medium=referral",
+                  "title": "",
+                  "rel": "photo-source",
+                  "anchorType": 0
+                }
+              ],
+              "layout": 1,
+              "metadata": {
+                "id": "0*T-G-IvEhsnz5S5Zy",
+                "originalWidth": 5568,
+                "originalHeight": 3712,
+                "isFeatured": true,
+                "unsplashPhotoId": "YK0HPwWDJ1I"
+              }
+            },
+            {
+              "name": "e54f",
+              "type": 1,
+              "text": "We as developers always need to stay up to date with new frameworks, tools, and new languages.",
+              "markups": []
+            },
+            {
+              "name": "09fd",
+              "type": 1,
+              "text": "So having a strategy that you can use to get to know a new language, framework or tool is beneficial in the long run.",
+              "markups": []
+            },
+            {
+              "name": "323b",
+              "type": 1,
+              "text": "Since I started with programming I have been writing scripts. All kinds of scripts, from simple utils scripts to web scrapers and command-line tools.",
+              "markups": []
+            },
+            {
+              "name": "9c66",
+              "type": 1,
+              "text": "Because of this I use writing scripts as a strategy to learn a new programming language. Over the years I added APIs and web-apps to my learning strategy.",
+              "markups": []
+            },
+            {
+              "name": "96a9",
+              "type": 1,
+              "text": "For example, when I wanted to learn Elixir I wrote a script. When I wanted to learn C# I wrote an API and web app.",
+              "markups": []
+            },
+            {
+              "name": "6d36",
+              "type": 3,
+              "text": "How can you find your strategy?",
+              "markups": [
+                {
+                  "type": 2,
+                  "start": 0,
+                  "end": 31
+                }
+              ]
+            },
+            {
+              "name": "d73d",
+              "type": 10,
+              "text": "Find a topic or idea that you would like to build or work on",
+              "markups": [
+                {
+                  "type": 1,
+                  "start": 0,
+                  "end": 60
+                }
+              ]
+            },
+            {
+              "name": "635f",
+              "type": 1,
+              "text": "I can spend hours on a CLI program/tool to make my code look perfect and also optimize the interaction as a user of the program or tool.",
+              "markups": []
+            },
+            {
+              "name": "37e1",
+              "type": 1,
+              "text": "You need to find something that you love to spend hours tinkering on. This way you can easily motivate yourself to get started with it and keep up the momentum.",
+              "markups": []
+            },
+            {
+              "name": "f709",
+              "type": 1,
+              "text": "2. Keep the final result in mind",
+              "markups": [
+                {
+                  "type": 1,
+                  "start": 0,
+                  "end": 32
+                }
+              ]
+            },
+            {
+              "name": "9949",
+              "type": 1,
+              "text": "You could get stuck or blocked when you try and create something without having a final result in mind.",
+              "markups": []
+            },
+            {
+              "name": "5232",
+              "type": 1,
+              "text": "For instance, if you want to learn a new programming language, the final result could be that you want your knowledge of the new programming language to be as good as (or even better than) the programming Languages you already know.",
+              "markups": []
+            },
+            {
+              "name": "d591",
+              "type": 1,
+              "text": "For me, when I wanted to learn C#, I decided to write a REST API as this is one of my go-to strategies. Writing a REST API is very straight forward and the tutorials for that are easy to find.",
+              "markups": [
+                {
+                  "type": 3,
+                  "start": 156,
+                  "end": 166,
+                  "href": "https://docs.microsoft.com/en-us/aspnet/web-api/overview/older-versions/build-restful-apis-with-aspnet-web-api",
+                  "title": "",
+                  "rel": "",
+                  "anchorType": 0
+                }
+              ]
+            },
+            {
+              "name": "3d06",
+              "type": 1,
+              "text": "3. Think about the future",
+              "markups": [
+                {
+                  "type": 1,
+                  "start": 0,
+                  "end": 25
+                }
+              ]
+            },
+            {
+              "name": "4c52",
+              "type": 1,
+              "text": "Ask yourself the following question:",
+              "markups": []
+            },
+            {
+              "name": "489b",
+              "type": 7,
+              "text": "Why do I want to learn X?",
+              "markups": []
+            },
+            {
+              "name": "dfec",
+              "type": 1,
+              "text": "Will this allow you to progress in your current job or set you up to \n- move into a new job?\n- move into that much wanted new job?\n- move into a different branch/area of work?",
+              "markups": []
+            },
+            {
+              "name": "20ad",
+              "type": 1,
+              "text": "Will it just be for occasional use as a hobby or are you going to be using it on a daily basis?",
+              "markups": []
+            },
+            {
+              "name": "6275",
+              "type": 1,
+              "text": "Do you want to learn “Insert new JavaScript Framework here”? Is it going to solve a problem you face or will it make your development experience easier?",
+              "markups": []
+            },
+            {
+              "name": "545a",
+              "type": 1,
+              "text": "I ask myself these questions every time a new Langauge or Framework pops up. This is also how I opted to learn ReactJS rather than VueJS — firstly, I like ReactJS, and secondly, I use reactJS on a daily basis at work.",
+              "markups": []
+            },
+            {
+              "name": "c580",
+              "type": 13,
+              "text": "Conclusion",
+              "markups": []
+            },
+            {
+              "name": "9a6b",
+              "type": 1,
+              "text": "Find a programming topic you like, define the final result, and GO!\nKeep the final result in mind while developing and never give up, you may rest, but not give up!",
+              "markups": []
+            }
+          ],
+          "sections": [
+            {
+              "name": "7e03",
+              "startIndex": 0
+            },
+            {
+              "name": "7d31",
+              "startIndex": 23
+            }
+          ]
+        },
+        "postDisplay": {
+          "coverless": true
+        }
+      },
+      "virtuals": {
+        "statusForCollection": "APPROVED",
+        "allowNotes": true,
+        "previewImage": {
+          "imageId": "0*T-G-IvEhsnz5S5Zy",
+          "filter": "",
+          "backgroundSize": "",
+          "originalWidth": 5568,
+          "originalHeight": 3712,
+          "strategy": "resample",
+          "height": 0,
+          "width": 0
+        },
+        "wordCount": 495,
+        "imageCount": 1,
+        "readingTime": 2.0679245283018868,
+        "subtitle": "This also applies to new Frameworks and Tooling!",
+        "userPostRelation": {
+          "userId": "405b29f48feb",
+          "postId": "fa7771c0d3eb",
+          "readAt": 1600155334082,
+          "readLaterAddedAt": 0,
+          "votedAt": 0,
+          "collaboratorAddedAt": 0,
+          "notesAddedAt": 0,
+          "subscribedAt": 0,
+          "lastReadSectionName": "7e03",
+          "lastReadVersionId": "5db9a3a45537",
+          "lastReadAt": 1600111037272,
+          "lastReadParagraphName": "d612",
+          "lastReadPercentage": 0,
+          "viewedAt": 1600191423808,
+          "presentedCountInResponseManagement": 0,
+          "clapCount": 0,
+          "seriesUpdateNotifsOptedInAt": 0,
+          "queuedAt": 0,
+          "seriesFirstViewedAt": 0,
+          "presentedCountInStream": 16,
+          "seriesLastViewedAt": 0,
+          "audioProgressSec": 0
+        },
+        "publishedInCount": 1,
+        "usersBySocialRecommends": [],
+        "noIndex": false,
+        "recommends": 2,
+        "isBookmarked": false,
+        "tags": [
+          {
+            "slug": "programming-tips",
+            "name": "Programming Tips",
+            "postCount": 787,
+            "metadata": {
+              "postCount": 787,
+              "coverImage": {
+                "id": "0*T-G-IvEhsnz5S5Zy",
+                "originalWidth": 5568,
+                "originalHeight": 3712,
+                "isFeatured": true,
+                "unsplashPhotoId": "YK0HPwWDJ1I"
+              }
+            },
+            "type": "Tag"
+          },
+          {
+            "slug": "development-tips",
+            "name": "Development Tips",
+            "postCount": 155,
+            "metadata": {
+              "postCount": 155,
+              "coverImage": {
+                "id": "1*9Puy65N_VsGzWLuZOY4Z2w.jpeg",
+                "originalWidth": 7846,
+                "originalHeight": 5233,
+                "isFeatured": true
+              }
+            },
+            "type": "Tag"
+          },
+          {
+            "slug": "coding",
+            "name": "Coding",
+            "postCount": 45165,
+            "metadata": {
+              "postCount": 45165,
+              "coverImage": {
+                "id": "0*uHqaoiT0ZOauAfqN",
+                "originalWidth": 2666,
+                "originalHeight": 3999,
+                "isFeatured": true,
+                "unsplashPhotoId": "SvIuD3P21PY"
+              }
+            },
+            "type": "Tag"
+          },
+          {
+            "slug": "developer-productivity",
+            "name": "Developer Productivity",
+            "postCount": 341,
+            "metadata": {
+              "postCount": 341,
+              "coverImage": {
+                "id": "0*T-G-IvEhsnz5S5Zy",
+                "originalWidth": 5568,
+                "originalHeight": 3712,
+                "isFeatured": true,
+                "unsplashPhotoId": "YK0HPwWDJ1I"
+              }
+            },
+            "type": "Tag"
+          }
+        ],
+        "socialRecommendsCount": 0,
+        "responsesCreatedCount": 0,
+        "links": {
+          "entries": [
+            {
+              "url": "https://unsplash.com?utm_source=medium&utm_medium=referral",
+              "alts": [],
+              "httpStatus": 200
+            },
+            {
+              "url": "https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral",
+              "alts": [],
+              "httpStatus": 200
+            },
+            {
+              "url": "https://docs.microsoft.com/en-us/aspnet/web-api/overview/older-versions/build-restful-apis-with-aspnet-web-api",
+              "alts": [],
+              "httpStatus": 200
+            }
+          ],
+          "version": "0.3",
+          "generatedAt": 1600118687881
+        },
+        "isLockedPreviewOnly": false,
+        "metaDescription": "",
+        "totalClapCount": 55,
+        "sectionCount": 2,
+        "readingList": 0,
+        "topics": [
+          {
+            "topicId": "decb52b64abf",
+            "slug": "programming",
+            "createdAt": 1493934116328,
+            "deletedAt": 0,
+            "image": {
+              "id": "1*iPa136b1cGEO7lvoXg6uHQ@2x.jpeg",
+              "originalWidth": 6016,
+              "originalHeight": 4016
+            },
+            "name": "Programming",
+            "description": "The good, the bad, the buggy.",
+            "relatedTopics": [],
+            "visibility": 1,
+            "relatedTags": [],
+            "relatedTopicIds": [],
+            "seoTitle": "Programming News and Articles — Medium",
+            "type": "Topic"
+          }
+        ]
+      },
+      "coverless": true,
+      "slug": "how-to-learn-a-new-programming-language-quickly",
+      "translationSourcePostId": "",
+      "translationSourceCreatorId": "",
+      "isApprovedTranslation": false,
+      "inResponseToPostId": "",
+      "inResponseToRemovedAt": 0,
+      "isTitleSynthesized": false,
+      "allowResponses": true,
+      "importedUrl": "",
+      "importedPublishedAt": 0,
+      "visibility": 2,
+      "uniqueSlug": "how-to-learn-a-new-programming-language-quickly-fa7771c0d3eb",
+      "previewContent": {
+        "bodyModel": {
+          "paragraphs": [
+            {
+              "name": "previewImage",
+              "type": 4,
+              "text": "",
+              "layout": 10,
+              "metadata": {
+                "id": "0*T-G-IvEhsnz5S5Zy",
+                "originalWidth": 5568,
+                "originalHeight": 3712,
+                "isFeatured": true,
+                "unsplashPhotoId": "YK0HPwWDJ1I"
+              }
+            },
+            {
+              "name": "d612",
+              "type": 3,
+              "text": "How to Learn a New Programming Language Quickly",
+              "markups": [],
+              "alignment": 1
+            },
+            {
+              "name": "968f",
+              "type": 13,
+              "text": "This also applies to new Frameworks and Tooling!",
+              "markups": [],
+              "alignment": 1
+            }
+          ],
+          "sections": [
+            {
+              "startIndex": 0
+            }
+          ]
+        },
+        "isFullContent": false,
+        "subtitle": "This also applies to new Frameworks and Tooling!"
+      },
+      "license": 0,
+      "inResponseToMediaResourceId": "",
+      "canonicalUrl": "https://medium.com/swlh/how-to-learn-a-new-programming-language-quickly-fa7771c0d3eb",
+      "approvedHomeCollectionId": "f5af2b715248",
+      "newsletterId": "",
+      "webCanonicalUrl": "https://medium.com/swlh/how-to-learn-a-new-programming-language-quickly-fa7771c0d3eb",
+      "mediumUrl": "https://medium.com/swlh/how-to-learn-a-new-programming-language-quickly-fa7771c0d3eb",
+      "migrationId": "",
+      "notifyFollowers": true,
+      "notifyTwitter": false,
+      "notifyFacebook": false,
+      "responseHiddenOnParentPostAt": 0,
+      "isSeries": false,
+      "isSubscriptionLocked": true,
+      "seriesLastAppendedAt": 0,
+      "audioVersionDurationSec": 0,
+      "sequenceId": "",
+      "isEligibleForRevenue": true,
+      "isBlockedFromHightower": false,
+      "deletedAt": 0,
+      "lockedPostSource": 1,
+      "hightowerMinimumGuaranteeStartsAt": 0,
+      "hightowerMinimumGuaranteeEndsAt": 0,
+      "featureLockRequestAcceptedAt": 0,
+      "mongerRequestType": 1,
+      "layerCake": 3,
+      "socialTitle": "",
+      "socialDek": "",
+      "editorialPreviewTitle": "",
+      "editorialPreviewDek": "",
+      "curationEligibleAt": 1600011644339,
+      "primaryTopic": {
+        "topicId": "decb52b64abf",
+        "slug": "programming",
+        "createdAt": 1493934116328,
+        "deletedAt": 0,
+        "image": {
+          "id": "1*iPa136b1cGEO7lvoXg6uHQ@2x.jpeg",
+          "originalWidth": 6016,
+          "originalHeight": 4016
+        },
+        "name": "Programming",
+        "description": "The good, the bad, the buggy.",
+        "relatedTopics": [],
+        "visibility": 1,
+        "relatedTags": [],
+        "relatedTopicIds": [],
+        "seoTitle": "Programming News and Articles — Medium",
+        "type": "Topic"
+      },
+      "primaryTopicId": "decb52b64abf",
+      "isProxyPost": false,
+      "proxyPostFaviconUrl": "",
+      "proxyPostProviderName": "",
+      "proxyPostType": 0,
+      "isSuspended": false,
+      "isLimitedState": false,
+      "seoTitle": "",
+      "previewContent2": {
+        "bodyModel": {
+          "paragraphs": [
+            {
+              "name": "d612",
+              "type": 3,
+              "text": "How to Learn a New Programming Language Quickly",
+              "markups": []
+            },
+            {
+              "name": "968f",
+              "type": 13,
+              "text": "This also applies to new Frameworks and Tooling!",
+              "markups": []
+            },
+            {
+              "name": "0a07",
+              "type": 4,
+              "text": "Photo by Kelly Sikkema on Unsplash",
+              "markups": [
+                {
+                  "type": 3,
+                  "start": 9,
+                  "end": 22,
+                  "href": "https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral",
+                  "title": "",
+                  "rel": "photo-creator",
+                  "anchorType": 0
+                },
+                {
+                  "type": 3,
+                  "start": 26,
+                  "end": 34,
+                  "href": "https://unsplash.com?utm_source=medium&utm_medium=referral",
+                  "title": "",
+                  "rel": "photo-source",
+                  "anchorType": 0
+                }
+              ],
+              "layout": 1,
+              "metadata": {
+                "id": "0*T-G-IvEhsnz5S5Zy",
+                "originalWidth": 5568,
+                "originalHeight": 3712,
+                "isFeatured": true,
+                "unsplashPhotoId": "YK0HPwWDJ1I"
+              }
+            },
+            {
+              "name": "e54f",
+              "type": 1,
+              "text": "We as developers always need to stay up to date with new frameworks, tools, and new languages.",
+              "markups": []
+            },
+            {
+              "name": "09fd",
+              "type": 1,
+              "text": "So having a strategy that you can use to get to know a new language, framework or tool is beneficial in the long run.",
+              "markups": []
+            },
+            {
+              "name": "323b",
+              "type": 1,
+              "text": "Since I started with programming I have been writing…",
+              "markups": []
+            }
+          ],
+          "sections": [
+            {
+              "name": "7e03",
+              "startIndex": 0
+            }
+          ]
+        },
+        "isFullContent": false,
+        "subtitle": "This also applies to new Frameworks and Tooling!"
+      },
+      "cardType": 0,
+      "isDistributionAlertDismissed": false,
+      "isShortform": false,
+      "shortformType": 0,
+      "responsesLocked": false,
+      "isLockedResponse": false,
+      "type": "Post"
+    },
+    "mentionedUsers": [],
+    "collaborators": [
+      {
+        "user": {
+          "userId": "f8a5f03ee5d0",
+          "name": "Laura",
+          "username": "ljetten",
+          "createdAt": 1599384697360,
+          "imageId": "1*dmbNkD5D-u45r44go_cf0g.png",
+          "backgroundImageId": "",
+          "bio": "",
+          "twitterScreenName": "",
+          "allowNotes": 1,
+          "mediumMemberAt": 0,
+          "isWriterProgramEnrolled": true,
+          "isSuspended": false,
+          "isMembershipTrialEligible": true,
+          "optInToIceland": false,
+          "type": "User"
+        },
+        "state": "hidden-author"
+      }
+    ],
+    "hideMeter": false,
+    "shareKey": "9e6b2945d9742c6b1dc3781900190d3d",
+    "collectionUserRelations": [
+      {
+        "collectionId": "eca1ba5ae1ca",
+        "userId": "405b29f48feb",
+        "role": "WRITER"
+      },
+      {
+        "collectionId": "8e221a9247df",
+        "userId": "405b29f48feb",
+        "role": "WRITER"
+      },
+      {
+        "collectionId": "f5af2b715248",
+        "userId": "405b29f48feb",
+        "role": "WRITER"
+      }
+    ],
+    "mode": "canEdit",
+    "references": {
+      "User": {
+        "405b29f48feb": {
+          "userId": "405b29f48feb",
+          "name": "Koen Verburg",
+          "username": "koenverburg",
+          "createdAt": 1513953763455,
+          "imageId": "0*UYgsGn-0eCFcu5Tl.jpg",
+          "backgroundImageId": "",
+          "bio": "Software Engineer based in Rotterdam — Photography and Art enthusiast, Dreamer, and thinker.",
+          "twitterScreenName": "",
+          "socialStats": {
+            "userId": "405b29f48feb",
+            "usersFollowedCount": 53,
+            "usersFollowedByCount": 43,
+            "type": "SocialStats"
+          },
+          "social": {
+            "userId": "405b29f48feb",
+            "targetUserId": "405b29f48feb",
+            "type": "Social"
+          },
+          "allowNotes": 1,
+          "mediumMemberAt": 1581864513000,
+          "isWriterProgramEnrolled": true,
+          "isSuspended": false,
+          "firstOpenedIosApp": 1587070639115,
+          "isMembershipTrialEligible": true,
+          "optInToIceland": false,
+          "type": "User"
+        }
+      },
+      "Collection": {
+        "f5af2b715248": {
+          "id": "f5af2b715248",
+          "name": "The Startup",
+          "slug": "swlh",
+          "tags": ["STARTUP", "TECH", "ENTREPRENEURSHIP", "DESIGN", "LIFE"],
+          "creatorId": "d43c46db5b92",
+          "description": "Medium's largest active publication, followed by +702K people. Follow to join our community.",
+          "shortDescription": "Medium's largest active publication, followed by +702K…",
+          "image": {
+            "imageId": "1*Xd2uZaVHfrGOP14W_3UQRg.jpeg",
+            "filter": "",
+            "backgroundSize": "",
+            "originalWidth": 1832,
+            "originalHeight": 1832,
+            "strategy": "resample",
+            "height": 0,
+            "width": 0
+          },
+          "metadata": {
+            "followerCount": 702212,
+            "activeAt": 1600185108367
+          },
+          "virtuals": {
+            "permissions": {
+              "canPublish": false,
+              "canPublishAll": false,
+              "canRepublish": true,
+              "canRemove": true,
+              "canManageAll": false,
+              "canSubmit": true,
+              "canEditPosts": false,
+              "canAddWriters": false,
+              "canViewStats": false,
+              "canSendNewsletter": false,
+              "canViewLockedPosts": true,
+              "canViewCloaked": true,
+              "canEditOwnPosts": true,
+              "canBeAssignedAuthor": true,
+              "canEnrollInHightower": false,
+              "canLockPostsForMediumMembers": false,
+              "canLockOwnPostsForMediumMembers": true,
+              "canViewNewsletterV2Stats": false,
+              "canCreateNewsletterV3": false
+            },
+            "isSubscribed": true,
+            "isEnrolledInHightower": false,
+            "isEligibleForHightower": false,
+            "isSubscribedToCollectionEmails": true,
+            "isMuted": false,
+            "canToggleEmail": true
+          },
+          "logo": {
+            "imageId": "1*IOJrKVmLnRcFz3E_KrrN_Q.png",
+            "filter": "",
+            "backgroundSize": "",
+            "originalWidth": 607,
+            "originalHeight": 104,
+            "strategy": "resample",
+            "height": 0,
+            "width": 0
+          },
+          "twitterUsername": "thestartup_",
+          "collectionMastheadId": "e142c0e64791",
+          "sections": [
+            {
+              "type": 2,
+              "collectionHeaderMetadata": {
+                "backgroundImage": {},
+                "logoImage": {
+                  "id": "1*pempph-OAqpRKG5v1-yisg@2x.png",
+                  "originalWidth": 940,
+                  "originalHeight": 832,
+                  "alt": "The Startup"
+                },
+                "alignment": 1,
+                "layout": 6
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 6,
+                "number": 1,
+                "postIds": ["b06013ae1017"],
+                "sectionHeader": "Editor's Note"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 7,
+                "postIds": [
+                  "332c3af8d6c9",
+                  "b387892076c4",
+                  "82d78da2cbc6",
+                  "4c9d1109fa36",
+                  "c2ffe8978727",
+                  "644efc6a1b51",
+                  "b327ad06c054"
+                ],
+                "sectionHeader": "Featured stories"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 2,
+                "layout": 5,
+                "number": 3,
+                "postIds": [],
+                "sectionHeader": "Trending"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 4,
+                "postIds": [
+                  "90f4e501227c",
+                  "701261d66d1f",
+                  "b2b281f82f33",
+                  "325608a69cd8"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 5,
+                "number": 3,
+                "postIds": ["1efbd8df2f71", "1f3eb0f93157", "92087109ee30"],
+                "sectionHeader": "The Latest"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 7,
+                "number": 7,
+                "postIds": [
+                  "a2d1fe16dd26",
+                  "54585b47636d",
+                  "e05eca9be2d2",
+                  "66f74fe1030f"
+                ],
+                "sectionHeader": "The Psychology of Doing Your Own Thing"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 6,
+                "postIds": [
+                  "10744fcbc4b",
+                  "41f3175277ea",
+                  "f54ff2afcb47",
+                  "372ad530a93f",
+                  "48b0d5d24b18",
+                  "6449271180de"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 4,
+                "postIds": [
+                  "6c6dba4a20e3",
+                  "976d1d44f370",
+                  "7632ad444a37",
+                  "324db98332f1"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 6,
+                "postIds": [
+                  "c70fbbf1210d",
+                  "2b1888dd9573",
+                  "996839cc9b97",
+                  "1a81545bbca3",
+                  "c5c799d641a4",
+                  "9429ee37d263"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 5,
+                "number": 7,
+                "postIds": [
+                  "3e1c3853192a",
+                  "4b0a7d7bc16b",
+                  "13baf38e7c64",
+                  "d3b6845fc06b"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 7,
+                "postIds": [
+                  "7bcaf0d35d66",
+                  "f1d014d38871",
+                  "543462a6eb75",
+                  "5dde2984ad1e",
+                  "cd28e068789c",
+                  "25caa5b597ca",
+                  "fee6dfb248ed"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 5,
+                "number": 3,
+                "postIds": ["45468543d5f9", "fbfea9521754", "2abbece9a3f1"]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 6,
+                "postIds": [
+                  "5a885fb374ba",
+                  "b0a2b9d43795",
+                  "8b46224943f4",
+                  "18e79655cad7",
+                  "7a44dbbae43a",
+                  "1d5061c68b24"
+                ]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 2,
+                "postIds": ["2f604003606b", "9a158cf201a7"]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 3,
+                "postIds": ["a841ee5e46f7", "eb83731efab7", "829364caefa7"]
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 5,
+                "postIds": [
+                  "24a3eef619c1",
+                  "4c4f9f396978",
+                  "15c31213168",
+                  "1ce1e2af614c",
+                  "2a57c0e98090"
+                ],
+                "sectionHeader": "Get smarter at building your thing"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 3,
+                "postIds": ["7d3174f22c9b", "73eeea488b8b", "834e905f1b0b"],
+                "sectionHeader": "A healthy mind = A healthy entrepreneur"
+              }
+            },
+            {
+              "type": 1,
+              "postListMetadata": {
+                "source": 3,
+                "layout": 4,
+                "number": 20,
+                "postIds": [
+                  "1ff72af17849",
+                  "c94335436486",
+                  "94a7d8a037c1",
+                  "1023cece510",
+                  "c60216212e82",
+                  "bd10ae2f68e5",
+                  "f0a2b83573e8",
+                  "c88047dbe974",
+                  "3c612473fa29",
+                  "6b089be8e30b",
+                  "604143b21a61",
+                  "1ca577d4e21c",
+                  "982f33820937",
+                  "cc815aa0acef",
+                  "bff22f7d1bcd",
+                  "82fcfcb4275e",
+                  "822f1649b1e4",
+                  "a1cd0fa6a761",
+                  "1e3b08b8e710",
+                  "e2444f37eee3"
+                ],
+                "sectionHeader": "Top 20 stories trending now"
+              }
+            }
+          ],
+          "tintColor": "#FFF9F9F9",
+          "lightText": false,
+          "favicon": {
+            "imageId": "",
+            "filter": "",
+            "backgroundSize": "",
+            "originalWidth": 0,
+            "originalHeight": 0,
+            "strategy": "resample",
+            "height": 0,
+            "width": 0
+          },
+          "colorPalette": {
+            "defaultBackgroundSpectrum": {
+              "colorPoints": [
+                {
+                  "color": "#FF848585",
+                  "point": 0
+                },
+                {
+                  "color": "#FF7B7B7B",
+                  "point": 0.1
+                },
+                {
+                  "color": "#FF717272",
+                  "point": 0.2
+                },
+                {
+                  "color": "#FF686868",
+                  "point": 0.3
+                },
+                {
+                  "color": "#FF5E5E5E",
+                  "point": 0.4
+                },
+                {
+                  "color": "#FF545454",
+                  "point": 0.5
+                },
+                {
+                  "color": "#FF494A4A",
+                  "point": 0.6
+                },
+                {
+                  "color": "#FF3F3F3F",
+                  "point": 0.7
+                },
+                {
+                  "color": "#FF333333",
+                  "point": 0.8
+                },
+                {
+                  "color": "#FF272727",
+                  "point": 0.9
+                },
+                {
+                  "color": "#FF1A1A1A",
+                  "point": 1
+                }
+              ],
+              "backgroundColor": "#FFFFFFFF"
+            },
+            "tintBackgroundSpectrum": {
+              "colorPoints": [
+                {
+                  "color": "#FFF9F9F9",
+                  "point": 0
+                },
+                {
+                  "color": "#FFE9E9E9",
+                  "point": 0.1
+                },
+                {
+                  "color": "#FFD8D8D8",
+                  "point": 0.2
+                },
+                {
+                  "color": "#FFC7C8C8",
+                  "point": 0.3
+                },
+                {
+                  "color": "#FFB6B6B7",
+                  "point": 0.4
+                },
+                {
+                  "color": "#FFA4A5A5",
+                  "point": 0.5
+                },
+                {
+                  "color": "#FF929393",
+                  "point": 0.6
+                },
+                {
+                  "color": "#FF7F8080",
+                  "point": 0.7
+                },
+                {
+                  "color": "#FF6B6C6D",
+                  "point": 0.8
+                },
+                {
+                  "color": "#FF565858",
+                  "point": 0.9
+                },
+                {
+                  "color": "#FF404242",
+                  "point": 1
+                }
+              ],
+              "backgroundColor": "#FFF9F9F9"
+            },
+            "highlightSpectrum": {
+              "colorPoints": [
+                {
+                  "color": "#FFF4F2F2",
+                  "point": 0
+                },
+                {
+                  "color": "#FFF2F0F0",
+                  "point": 0.1
+                },
+                {
+                  "color": "#FFF0EEEE",
+                  "point": 0.2
+                },
+                {
+                  "color": "#FFEEECEC",
+                  "point": 0.3
+                },
+                {
+                  "color": "#FFECEBEA",
+                  "point": 0.4
+                },
+                {
+                  "color": "#FFEAE9E8",
+                  "point": 0.5
+                },
+                {
+                  "color": "#FFE8E7E7",
+                  "point": 0.6
+                },
+                {
+                  "color": "#FFE6E5E5",
+                  "point": 0.7
+                },
+                {
+                  "color": "#FFE4E3E3",
+                  "point": 0.8
+                },
+                {
+                  "color": "#FFE2E1E1",
+                  "point": 0.9
+                },
+                {
+                  "color": "#FFE0DFDF",
+                  "point": 1
+                }
+              ],
+              "backgroundColor": "#FFFFFFFF"
+            }
+          },
+          "navItems": [
+            {
+              "type": 2,
+              "title": "We’re Reimagining The Startup",
+              "postId": "b06013ae1017",
+              "url": "https://medium.com/swlh/a-call-for-great-stories-were-reimagining-the-startup-medium-s-largest-publication-with-680k-b06013ae1017",
+              "source": "postId"
+            },
+            {
+              "type": 3,
+              "title": "Are you curious?",
+              "url": "https://medium.com/curious"
+            }
+          ],
+          "colorBehavior": 2,
+          "instantArticlesState": 0,
+          "acceleratedMobilePagesState": 0,
+          "ampLogo": {
+            "imageId": "",
+            "filter": "",
+            "backgroundSize": "",
+            "originalWidth": 0,
+            "originalHeight": 0,
+            "strategy": "resample",
+            "height": 0,
+            "width": 0
+          },
+          "header": {
+            "backgroundImage": {},
+            "logoImage": {
+              "id": "1*pempph-OAqpRKG5v1-yisg@2x.png",
+              "originalWidth": 940,
+              "originalHeight": 832,
+              "alt": "The Startup"
+            },
+            "alignment": 1,
+            "layout": 6
+          },
+          "subscriberCount": 702212,
+          "tagline": "Medium's largest active publication, followed by +702K people. Follow to join our community.",
+          "isOptedIntoAurora": false,
+          "newsletterV3": {
+            "newsletterV3Id": "13df37cfc4c2",
+            "type": 1,
+            "name": "Editor's Note",
+            "description": "----------",
+            "collectionId": "f5af2b715248",
+            "newsletterSlug": "editors-note",
+            "isSubscribed": true,
+            "showPromo": false,
+            "avatarImageId": "",
+            "creatorId": "d43c46db5b92"
+          },
+          "isCurationAllowedByDefault": false,
+          "polarisCoverImage": {
+            "imageId": "",
+            "filter": "",
+            "backgroundSize": "",
+            "originalWidth": 0,
+            "originalHeight": 0,
+            "strategy": "resample",
+            "height": 0,
+            "width": 0
+          },
+          "type": "Collection"
+        }
+      },
+      "Social": {
+        "405b29f48feb": {
+          "userId": "405b29f48feb",
+          "targetUserId": "405b29f48feb",
+          "type": "Social"
+        }
+      },
+      "SocialStats": {
+        "405b29f48feb": {
+          "userId": "405b29f48feb",
+          "usersFollowedCount": 53,
+          "usersFollowedByCount": 43,
+          "type": "SocialStats"
+        }
+      }
+    }
+  },
+  "v": 3,
+  "b": "42265-981e766"
+}
